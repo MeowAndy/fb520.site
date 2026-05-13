@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="菲比Bot｜鸣潮免费分享机器人，公益运行，支持鸣潮、原神、崩铁、绝区零等游戏服务。" />
+  <title>菲比 Bot｜鸣潮机器人官方平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            abyss: '#070914',
+            tide: '#65fff0',
+            luna: '#b89cff',
+            gold: '#ffd98a',
+            phrolova: '#a579ff'
+          },
+          boxShadow: {
+            glow: '0 0 45px rgba(101,255,240,.22)',
+            gold: '0 0 28px rgba(255,217,138,.28)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { color-scheme: dark; }
+    html { scroll-behavior: smooth; }
+    body {
+      background:
+        radial-gradient(circle at 16% 8%, rgba(101,255,240,.18), transparent 30%),
+        radial-gradient(circle at 78% 0%, rgba(184,156,255,.22), transparent 34%),
+        radial-gradient(circle at 52% 88%, rgba(255,217,138,.10), transparent 34%),
+        linear-gradient(135deg, #070914 0%, #111834 52%, #090d1a 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .bg-noise::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      opacity: .22; mix-blend-mode: overlay;
+    }
+    .glass {
+      background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+      backdrop-filter: blur(18px);
+    }
+    .glass-strong {
+      background: linear-gradient(135deg, rgba(11,16,34,.78), rgba(25,31,58,.58));
+      border: 1px solid rgba(101,255,240,.18);
+      box-shadow: 0 24px 70px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.08);
+      backdrop-filter: blur(20px);
+    }
+    .tide-line {
+      position: relative;
+      overflow: hidden;
+    }
+    .tide-line::after {
+      content: "";
+      position: absolute; left: -40%; top: 0; width: 40%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(101,255,240,.28), transparent);
+      animation: scan 5.5s ease-in-out infinite;
+    }
+    @keyframes scan { 0%, 18% { transform: translateX(0); } 55%, 100% { transform: translateX(350%); } }
+    .orb { position:absolute; border-radius:9999px; filter: blur(1px); animation: float 8s ease-in-out infinite; opacity:.8; }
+    .orb:nth-child(2) { animation-delay: -2s; }
+    .orb:nth-child(3) { animation-delay: -4s; }
+    @keyframes float { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(18px,-24px,0) scale(1.08); } }
+    .wave-ring { animation: pulseRing 3.8s ease-in-out infinite; }
+    @keyframes pulseRing { 0%,100% { transform: scale(1); opacity:.55; } 50% { transform: scale(1.08); opacity:.95; } }
+    .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-in.show { opacity: 1; transform: translateY(0); }
+    .command { background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.14); color: #fff; }
+    .copy-btn { transition: .2s ease; }
+    .copy-btn:hover { transform: translateY(-1px); }
+    .collapsible.active .chev { transform: rotate(180deg); }
+    .panel { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .nav-link { position: relative; }
+    .nav-link::after { content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:#65fff0; transition:.25s; }
+    .nav-link:hover::after { width:100%; }
+  </style>
+</head>
+<body class="bg-noise text-slate-100 font-sans">
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="orb w-64 h-64 bg-tide/10 left-[-80px] top-28"></div>
+    <div class="orb w-80 h-80 bg-luna/10 right-[-120px] top-8"></div>
+    <div class="orb w-72 h-72 bg-gold/10 left-[45%] bottom-[-120px]"></div>
+  </div>
+
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-abyss/70 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#top" class="flex items-center gap-3">
+        <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-tide via-luna to-gold p-[1px] shadow-glow">
+          <div class="w-full h-full rounded-2xl bg-abyss flex items-center justify-center">
+            <i class="fa fa-star text-gold text-xl wave-ring"></i>
+          </div>
+        </div>
+        <div>
+          <h1 class="text-lg md:text-2xl font-black tracking-wide">菲比Bot</h1>
+          <p class="text-xs text-tide/80">鸣潮免费分享机器人</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm text-slate-300">
+        <a class="nav-link hover:text-tide" href="#news">最新公告</a>
+        <a class="nav-link hover:text-tide" href="#features">功能介绍</a>
+        <a class="nav-link hover:text-tide" href="#add">添加方式</a>
+        <a class="nav-link hover:text-tide" href="#rules">服务条例</a>
+      </nav>
+      <button id="menuBtn" class="md:hidden w-10 h-10 rounded-xl glass flex items-center justify-center"><i class="fa fa-bars"></i></button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-abyss/95">
+      <div class="px-4 py-4 grid gap-3 text-slate-300">
+        <a href="#news">最新公告</a><a href="#features">功能介绍</a><a href="#add">添加方式</a><a href="#rules">服务条例</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="relative z-10">
+    <section class="max-w-7xl mx-auto px-4 pt-16 pb-12 md:pt-24 md:pb-20">
+      <div class="grid lg:grid-cols-[1.08fr_.92fr] gap-10 items-center">
+        <div class="fade-in">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm text-tide mb-6">
+            <i class="fa fa-heartbeat"></i><span>公益运行 · 免费使用 · 鸣潮优先</span>
+          </div>
+          <h2 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
+            与<span class="text-transparent bg-clip-text bg-gradient-to-r from-tide via-luna to-gold">菲比</span>一起，<br />听见群聊里的鸣潮。
+          </h2>
+          <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl">菲比 Bot 是面向鸣潮玩家的免费机器人平台，集成账号、查询、签到、评分与多游戏服务，保持公益初心，持续陪伴每一个热爱索拉里斯的群聊。</p>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-tide to-luna text-abyss font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 加入用户审核群</a>
+            <a href="#features" class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-2xl glass font-bold hover:border-tide/40 transition"><i class="fa fa-magic"></i> 查看功能</a>
+          </div>
+        </div>
+        <div class="fade-in relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-tide/25 via-luna/20 to-gold/10 rounded-[2.2rem] blur-2xl"></div>
+          <div class="relative glass-strong rounded-[2.2rem] p-6 md:p-8 tide-line">
+            <div class="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-gradient-to-br from-[#111a3b] via-[#1d2148] to-[#080b18] border border-white/10">
+              <div class="absolute inset-0 opacity-40" style="background: radial-gradient(circle at 50% 18%, rgba(101,255,240,.45), transparent 28%), radial-gradient(circle at 70% 70%, rgba(184,156,255,.38), transparent 35%);"></div>
+              <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-abyss via-abyss/60 to-transparent"></div>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+                <div class="w-32 h-32 rounded-full border border-tide/50 shadow-glow flex items-center justify-center mb-7 wave-ring">
+                  <div class="w-24 h-24 rounded-full bg-gradient-to-br from-tide/30 to-luna/30 flex items-center justify-center">
+                    <i class="fa fa-star text-5xl text-gold"></i>
+                  </div>
+                </div>
+                <h3 class="text-4xl font-black tracking-widest">PHOEBE</h3>
+                <p class="text-tide mt-2 tracking-[.4em] text-xs">WUTHERING WAVES BOT</p>
+                <div class="mt-8 grid grid-cols-3 gap-3 w-full">
+                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-tide">免费</p><p class="text-xs text-slate-400">公益运行</p></div>
+                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-luna">fb</p><p class="text-xs text-slate-400">触发前缀</p></div>
+                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-gold">多游</p><p class="text-xs text-slate-400">插件支持</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="max-w-7xl mx-auto px-4 space-y-14 pb-20">
+      <section id="news" class="fade-in">
+        <SectionTitle icon="bullhorn" title="最新公告"></SectionTitle>
+        <div class="glass-strong rounded-3xl p-6 md:p-8">
+          <ul class="grid gap-4 text-slate-200">
+            <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>菲比Bot是免费Bot，从不会收取任何费用</span></li>
+            <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>菲比只服务现在市面上的游戏服务（鸣潮、原神、崩铁、绝区零、终末地、三角洲、二重螺旋...）</span></li>
+            <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>详细功能发送 <code class="command px-2 py-1 rounded-lg">fb功能</code> 进行查看</span></li>
+            <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>菲比Bot是公益性产品，不要与市面上付费的进行对比，付费的东西，需要赚钱稳定，而菲比Bot一直都在公益运营，难免会出现宕机情况</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="fade-in glass-strong rounded-3xl p-6 md:p-8 border-tide/30">
+        <h2 class="text-2xl md:text-3xl font-black mb-6 flex items-center gap-3"><i class="fa fa-info-circle text-tide"></i>菲比Bot | 鸣潮机器人 说明</h2>
+        <ul class="grid gap-3 text-slate-200">
+          <li class="flex gap-3"><i class="fa fa-check text-gold mt-1"></i><span>常态部署，会持续保持功能正常（会出现宕机问题是正常，一般是在维护，好了会直接恢复）</span></li>
+          <li class="flex gap-3"><i class="fa fa-check text-gold mt-1"></i><span>菲比Bot是免费Bot，群聊私聊都可以使用，所以不准出现辱骂的现象</span></li>
+          <li class="flex gap-3"><i class="fa fa-check text-gold mt-1"></i><span>菲比Bot需要进入 <code class="command px-2 py-1 rounded-lg">小菲小豹用户审核群</code> 审核通过后，按照要求进行 <code class="command px-2 py-1 rounded-lg">邀请</code></span></li>
+          <li class="flex gap-3"><i class="fa fa-check text-gold mt-1"></i><span>具体功能发送 <code class="command px-2 py-1 rounded-lg">fb功能</code> 可查看指令列表</span></li>
+        </ul>
+      </section>
+
+      <section id="login" class="fade-in">
+        <SectionTitle icon="lock" title="登录说明"></SectionTitle>
+        <div class="glass rounded-3xl p-6 md:p-8">
+          <p class="text-slate-300 mb-5">当前策略使用库街区app登录，如果希望同时登录则只能在库街区登录后手动抓包</p>
+          <div class="rounded-2xl border border-tide/25 bg-tide/10 p-5 text-slate-200">
+            <p><i class="fa fa-lightbulb-o text-gold mr-2"></i>完全按照该教程保证100%成功，约80%的用户读完教程可以正确进行登录！</p>
+            <p class="mt-3"><i class="fa fa-lightbulb-o text-gold mr-2"></i>如果需要做到同时登录的情况：发送 <code class="command px-2 py-1 rounded-lg">fb如何同时登录</code> 可查看教程</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="add" class="fade-in">
+        <SectionTitle icon="link" title="添加方式 & 群聊要求"></SectionTitle>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="glass rounded-3xl p-6 md:p-8">
+            <h3 class="text-2xl font-black text-luna mb-5">添加方式</h3>
+            <p class="text-slate-300 mb-3">--------------------------------------</p>
+            <p class="text-slate-300 mb-3">为方便邀请 <code class="command px-2 py-1 rounded-lg">菲比Bot</code>，请加审核群</p>
+            <p class="text-slate-300 mb-6">--------------------------------------</p>
+            <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-luna to-tide text-abyss font-bold shadow-glow"><i class="fa fa-qq"></i> 加入用户审核群</a>
+          </div>
+          <div class="glass rounded-3xl p-6 md:p-8">
+            <h3 class="text-2xl font-black text-luna mb-5">群聊要求</h3>
+            <ul class="space-y-3 text-slate-300">
+              <li class="flex gap-3"><i class="fa fa-angle-right text-tide mt-1"></i><span>必须有人使用鸣潮功能，避免多鸣潮机器人共群</span></li>
+              <li class="flex gap-3"><i class="fa fa-angle-right text-tide mt-1"></i><span>不得终止续费其他Bot并改为使用菲比Bot，且不得与付费Bot共存</span></li>
+              <li class="flex gap-3"><i class="fa fa-angle-right text-tide mt-1"></i><span>群活跃人数达到5+最好是，或你是我的熟人</span></li>
+              <li class="flex gap-3"><i class="fa fa-angle-right text-tide mt-1"></i><span>辱骂者菲比Bot检测自动拉黑，无故禁言直接退群处理</span></li>
+              <li class="flex gap-3"><i class="fa fa-angle-right text-tide mt-1"></i><span>群主必须知晓，机器人可能导致刷屏，请规范使用</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="rules" class="fade-in">
+        <SectionTitle icon="exclamation-triangle" title="服务条例"></SectionTitle>
+        <div class="glass rounded-3xl p-6 md:p-8">
+          <ul class="space-y-3 text-slate-300">
+            <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>踢出群聊后拉黑群</span></li>
+            <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>鸣潮等各种游戏功能一直开放，其他功能（如AI）开关权限在主人手上</span></li>
+            <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>需要启用寻找反馈群群主</span></li>
+            <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>恶意行为(发电玩笑不算，自己把握)，被主人发现全局拉黑处理</span></li>
+            <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>如因库洛操作导致机器人无法使用，我也没办法鸭</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="features" class="fade-in">
+        <SectionTitle icon="magic" title="功能介绍"></SectionTitle>
+        <div class="space-y-5">
+          <FeaturePanel title="基本功能" icon="gamepad" color="text-tide">
+            <p class="text-slate-300 mb-5">触发前缀为 <code class="command px-2 py-1 rounded-lg">fb</code></p>
+            <div class="grid md:grid-cols-2 gap-5">
+              <div class="glass rounded-2xl p-5">
+                <h4 class="font-bold mb-3">示例指令：</h4>
+                <div class="space-y-3">
+                  <Command text="fb帮助"></Command>
+                  <Command text="fb开启自动签到"></Command>
+                  <Command text="fb功能"></Command>
+                </div>
+              </div>
+              <div class="glass rounded-2xl p-5">
+                <h4 class="font-bold mb-3">核心框架 & 其他游戏插件：</h4>
+                <ul class="space-y-1 text-slate-300">
+                  <li>核心框架：Genshin-bots/gsuid_core</li><li>鸣潮插件：XutheringWavesUID</li><li>评分插件：ScoreEcho</li><li>签到插件：RoverSign</li>
+                </ul>
+                <div class="mt-4 pt-4 border-t border-white/10 text-slate-300">
+                  <p class="text-sm text-slate-400 mb-2">同基于gsuid_core的其他Bot指令：</p>
+                  <p>原神：<code class="command px-2 py-1 rounded-lg">ys帮助</code>　星铁：<code class="command px-2 py-1 rounded-lg">xt帮助</code></p>
+                  <p class="mt-2">绝区零：<code class="command px-2 py-1 rounded-lg">z3帮助</code>　三角洲：<code class="command px-2 py-1 rounded-lg">delta帮助</code></p>
+                  <p class="mt-2">BA：<code class="command px-2 py-1 rounded-lg">ba帮助</code>　二重螺旋：<code class="command px-2 py-1 rounded-lg">dna帮助</code></p>
+                </div>
+              </div>
+            </div>
+          </FeaturePanel>
+          <FeaturePanel title="其他Bot指令" icon="robot" color="text-luna"><div class="py-10 text-center text-slate-400 text-lg">暂无</div></FeaturePanel>
+          <FeaturePanel title="菲比框架特性" icon="cogs" color="text-gold">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div><h4 class="font-bold text-gold mb-3">核心特性：</h4><ul class="space-y-2 text-slate-300"><li>--------------------------------------</li><li>菲比Bot承诺拥有的免费鸣潮机器人</li><li>如果需要 <code class="command px-2 py-1 rounded-lg">娱乐功能</code> 如：视频解析、表情包等</li><li>请先通过用户审核后，进群邀请 <code class="command px-2 py-1 rounded-lg">凌阳娱乐</code></li><li>目前二游游戏功能与娱乐功能是分离的，也不会合并。</li><li>--------------------------------------</li></ul></div>
+              <div><h4 class="font-bold text-gold mb-3">开发信息：</h4><ul class="space-y-2 text-slate-300"><li><i class="fa fa-tachometer text-tide mr-2"></i>16-16 Linux服务器</li><li><i class="fa fa-plus-circle text-tide mr-2"></i>Ai功能请联系菲比Bot部署这开启！</li></ul></div>
+            </div>
+          </FeaturePanel>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="relative z-10 border-t border-white/10 bg-abyss/70 py-10">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6 items-center">
+      <div class="flex items-center gap-3"><i class="fa fa-star text-gold text-2xl"></i><h3 class="text-xl font-black">菲比 Bot 鸣潮机器人</h3></div>
+      <div class="flex gap-5 text-slate-300"><i class="fa fa-qq text-xl"></i><i class="fa fa-github text-xl"></i><i class="fa fa-envelope text-xl"></i></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 mt-6 pt-6 border-t border-white/10 text-center text-slate-500 text-sm">
+      <p>© 2025 菲比 Bot 保留所有权利 | 免费开源机器人，仅用于交流学习</p>
+      <p class="mt-2">如有问题请联系机器人主人，禁止用于商业用途</p>
+    </div>
+  </footer>
+
+  <template id="section-title-template"></template>
+  <script>
+    function SectionTitle({icon, title}){return `<div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-${icon}"></i></div><h2 class="text-2xl md:text-3xl font-black">${title}</h2></div>`}
+    function FeaturePanel({title, icon, color}, content){return `<div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black ${color} flex items-center gap-3"><i class="fa fa-${icon}"></i>${title}</span><i class="fa fa-chevron-down chev transition-transform text-slate-400"></i></button><div class="panel"><div class="p-6 border-t border-white/10">${content}</div></div></div>`}
+    function Command({text}){return `<div class="flex items-center justify-between gap-3"><code class="command px-3 py-2 rounded-xl">${text}</code><button class="copy-btn px-3 py-2 rounded-xl bg-tide/15 hover:bg-tide/25 text-tide text-sm" data-command="${text}"><i class="fa fa-copy mr-1"></i>复制</button></div>`}
+    document.querySelectorAll('SectionTitle').forEach(el => el.outerHTML = SectionTitle({icon: el.getAttribute('icon'), title: el.getAttribute('title')}));
+    document.querySelectorAll('FeaturePanel').forEach(el => el.outerHTML = FeaturePanel({title: el.getAttribute('title'), icon: el.getAttribute('icon'), color: el.getAttribute('color')}, el.innerHTML));
+    document.querySelectorAll('Command').forEach(el => el.outerHTML = Command({text: el.getAttribute('text')}));
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('menuBtn')?.addEventListener('click', () => document.getElementById('mobileMenu')?.classList.toggle('hidden'));
+      document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const target=document.querySelector(a.getAttribute('href')); if(target){e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); document.getElementById('mobileMenu')?.classList.add('hidden');} }));
+      document.querySelectorAll('.copy-btn').forEach(btn => btn.addEventListener('click', async () => { await navigator.clipboard.writeText(btn.dataset.command); const old=btn.innerHTML; btn.innerHTML='<i class="fa fa-check mr-1"></i>已复制'; setTimeout(()=>btn.innerHTML=old,1800); }));
+      document.querySelectorAll('.collapsible').forEach(btn => btn.addEventListener('click', () => { btn.classList.toggle('active'); const p=btn.nextElementSibling; p.style.maxHeight = p.style.maxHeight ? null : p.scrollHeight + 'px'; }));
+      const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); }), {threshold:.12});
+      document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    });
+  </script>
+</body>
+</html>
