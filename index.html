@@ -163,7 +163,7 @@
 
     <div class="max-w-7xl mx-auto px-4 space-y-14 pb-20">
       <section id="news" class="fade-in">
-        <SectionTitle icon="bullhorn" title="最新公告"></SectionTitle>
+        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-bullhorn"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">最新公告</h2></div>
         <div class="glass-strong rounded-3xl p-6 md:p-8">
           <ul class="grid gap-4 text-slate-700">
             <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>菲比Bot是免费Bot，从不会收取任何费用</span></li>
@@ -185,7 +185,7 @@
       </section>
 
       <section id="login" class="fade-in">
-        <SectionTitle icon="lock" title="登录说明"></SectionTitle>
+        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-lock"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">登录说明</h2></div>
         <div class="glass rounded-3xl p-6 md:p-8">
           <p class="text-slate-600 mb-5">当前策略使用库街区app登录，如果希望同时登录则只能在库街区登录后手动抓包</p>
           <div class="rounded-2xl border border-tide/25 bg-tide/10 p-5 text-slate-700">
@@ -196,7 +196,7 @@
       </section>
 
       <section id="add" class="fade-in">
-        <SectionTitle icon="link" title="添加方式 & 群聊要求"></SectionTitle>
+        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-link"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">添加方式 & 群聊要求</h2></div>
         <div class="grid md:grid-cols-2 gap-6">
           <div class="glass rounded-3xl p-6 md:p-8">
             <h3 class="text-2xl font-black text-luna mb-5">添加方式</h3>
@@ -219,7 +219,7 @@
       </section>
 
       <section id="rules" class="fade-in">
-        <SectionTitle icon="exclamation-triangle" title="服务条例"></SectionTitle>
+        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-exclamation-triangle"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">服务条例</h2></div>
         <div class="glass rounded-3xl p-6 md:p-8">
           <ul class="space-y-3 text-slate-600">
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>踢出群聊后拉黑群</span></li>
@@ -234,7 +234,7 @@
 
 
       <section id="overview" class="fade-in">
-        <SectionTitle icon="th-large" title="菲比功能全览"></SectionTitle>
+        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-th-large"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">菲比功能全览</h2></div>
         <div class="glass-strong rounded-3xl p-6 md:p-8 mb-6">
           <div class="grid lg:grid-cols-[.9fr_1.1fr] gap-8 items-center">
             <div>
@@ -278,17 +278,17 @@
       </section>
 
       <section id="features" class="fade-in">
-        <SectionTitle icon="magic" title="功能介绍"></SectionTitle>
+        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-magic"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">功能介绍</h2></div>
         <div class="space-y-5">
-          <FeaturePanel title="基本功能" icon="gamepad" color="text-tide">
+          <div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black text-tide flex items-center gap-3"><i class="fa fa-gamepad"></i>基本功能</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-amber-100">
             <p class="text-slate-600 mb-5">触发前缀为 <code class="command px-2 py-1 rounded-lg">fb</code></p>
             <div class="grid md:grid-cols-2 gap-5">
               <div class="glass rounded-2xl p-5">
                 <h4 class="font-bold mb-3">示例指令：</h4>
                 <div class="space-y-3">
-                  <Command text="fb帮助"></Command>
-                  <Command text="fb开启自动签到"></Command>
-                  <Command text="fb功能"></Command>
+                  <div class="flex items-center justify-between gap-3"><code class="command px-3 py-2 rounded-xl">fb帮助</code><button class="copy-btn px-3 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-700 text-sm" data-command="fb帮助"><i class="fa fa-copy mr-1"></i>复制</button></div>
+                  <div class="flex items-center justify-between gap-3"><code class="command px-3 py-2 rounded-xl">fb开启自动签到</code><button class="copy-btn px-3 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-700 text-sm" data-command="fb开启自动签到"><i class="fa fa-copy mr-1"></i>复制</button></div>
+                  <div class="flex items-center justify-between gap-3"><code class="command px-3 py-2 rounded-xl">fb功能</code><button class="copy-btn px-3 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-700 text-sm" data-command="fb功能"><i class="fa fa-copy mr-1"></i>复制</button></div>
                 </div>
               </div>
               <div class="glass rounded-2xl p-5">
@@ -304,14 +304,14 @@
                 </div>
               </div>
             </div>
-          </FeaturePanel>
-          <FeaturePanel title="其他Bot指令" icon="robot" color="text-luna"><div class="py-10 text-center text-slate-500 text-lg">暂无</div></FeaturePanel>
-          <FeaturePanel title="菲比框架特性" icon="cogs" color="text-gold">
+          </div></div></div>
+          <div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black text-luna flex items-center gap-3"><i class="fa fa-robot"></i>其他Bot指令</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-amber-100"><div class="py-10 text-center text-slate-500 text-lg">暂无</div></div></div></div>
+          <div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black text-gold flex items-center gap-3"><i class="fa fa-cogs"></i>菲比框架特性</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-amber-100">
             <div class="grid md:grid-cols-2 gap-6">
               <div><h4 class="font-bold text-gold mb-3">核心特性：</h4><ul class="space-y-2 text-slate-600"><li>--------------------------------------</li><li>菲比Bot承诺拥有的免费鸣潮机器人</li><li>如果需要 <code class="command px-2 py-1 rounded-lg">娱乐功能</code> 如：视频解析、表情包等</li><li>请先通过用户审核后，进群邀请 <code class="command px-2 py-1 rounded-lg">凌阳娱乐</code></li><li>目前二游游戏功能与娱乐功能是分离的，也不会合并。</li><li>--------------------------------------</li></ul></div>
               <div><h4 class="font-bold text-gold mb-3">开发信息：</h4><ul class="space-y-2 text-slate-600"><li><i class="fa fa-tachometer text-tide mr-2"></i>16-16 Linux服务器</li><li><i class="fa fa-plus-circle text-tide mr-2"></i>Ai功能请联系菲比Bot部署这开启！</li></ul></div>
             </div>
-          </FeaturePanel>
+          </div></div></div>
         </div>
       </section>
     </div>
@@ -340,14 +340,8 @@
     </div>
   </footer>
 
-  <template id="section-title-template"></template>
   <script>
-    function SectionTitle({icon, title}){return `<div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-${icon}"></i></div><h2 class="text-2xl md:text-3xl font-black">${title}</h2></div>`}
-    function FeaturePanel({title, icon, color}, content){return `<div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black ${color} flex items-center gap-3"><i class="fa fa-${icon}"></i>${title}</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-white/10">${content}</div></div></div>`}
-    function Command({text}){return `<div class="flex items-center justify-between gap-3"><code class="command px-3 py-2 rounded-xl">${text}</code><button class="copy-btn px-3 py-2 rounded-xl bg-tide/15 hover:bg-tide/25 text-tide text-sm" data-command="${text}"><i class="fa fa-copy mr-1"></i>复制</button></div>`}
-    document.querySelectorAll('SectionTitle').forEach(el => el.outerHTML = SectionTitle({icon: el.getAttribute('icon'), title: el.getAttribute('title')}));
-    document.querySelectorAll('FeaturePanel').forEach(el => el.outerHTML = FeaturePanel({title: el.getAttribute('title'), icon: el.getAttribute('icon'), color: el.getAttribute('color')}, el.innerHTML));
-    document.querySelectorAll('Command').forEach(el => el.outerHTML = Command({text: el.getAttribute('text')}));
+
 
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('menuBtn')?.addEventListener('click', () => document.getElementById('mobileMenu')?.classList.toggle('hidden'));
@@ -360,8 +354,5 @@
   </script>
 
 
-  <!-- 星星掉落 + 鼠标拖尾 JS -->
-  <script>
-  </script>
 </body>
 </html>
