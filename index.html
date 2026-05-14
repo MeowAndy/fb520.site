@@ -83,6 +83,70 @@
     .nav-link { position: relative; }
     .nav-link::after { content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:#65fff0; transition:.25s; }
     .nav-link:hover::after { width:100%; }
+
+    /* === 星星掉落动画 === */
+    .star-fall {
+      position: fixed;
+      top: -10px;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 6px 2px rgba(101,255,240,.6), 0 0 12px 4px rgba(184,156,255,.3);
+      animation: starDrop linear forwards;
+    }
+    @keyframes starDrop {
+      0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+      70% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+    }
+    /* === 鼠标拖尾 === */
+    .cursor-trail {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      mix-blend-mode: screen;
+      animation: trailFade 0.6s ease-out forwards;
+    }
+    @keyframes trailFade {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.1); }
+    }
+    /* === Banner 背景图 === */
+    .hero-banner-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/banner-gpt.png') center/cover no-repeat;
+      opacity: 0.15;
+      border-radius: 2.2rem;
+      z-index: 0;
+    }
+    .hero-character {
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      width: 280px;
+      opacity: 0.25;
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* === 装饰浮动图 === */
+    .decor-float {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background: url('assets/decor-gpt.png') center bottom/cover no-repeat;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+    }
   </style>
 </head>
 <body class="bg-noise text-slate-100 font-sans">
@@ -139,7 +203,7 @@
         </div>
         <div class="fade-in relative">
           <div class="absolute inset-0 bg-gradient-to-br from-tide/25 via-luna/20 to-gold/10 rounded-[2.2rem] blur-2xl"></div>
-          <div class="relative glass-strong rounded-[2.2rem] p-6 md:p-8 tide-line">
+          <div class="relative glass-strong rounded-[2.2rem] p-6 md:p-8 tide-line"><div class="hero-banner-bg"></div>
             <div class="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-gradient-to-br from-[#111a3b] via-[#1d2148] to-[#080b18] border border-white/10">
               <div class="absolute inset-0 opacity-40" style="background: radial-gradient(circle at 50% 18%, rgba(101,255,240,.45), transparent 28%), radial-gradient(circle at 70% 70%, rgba(184,156,255,.38), transparent 35%);"></div>
               <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-abyss via-abyss/60 to-transparent"></div>
@@ -250,7 +314,7 @@
               </div>
             </div>
             <div class="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-glow">
-              <img src="assets/waves.svg" alt="鸣潮功能视觉图" class="w-full h-full object-cover">
+              <img src="assets/banner-gpt.png" alt="鸣潮功能视觉图" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-abyss/75 via-transparent to-transparent"></div>
               <div class="absolute bottom-5 left-5 right-5">
                 <p class="text-sm text-tide">核心方向</p>
@@ -320,6 +384,18 @@
     </div>
   </main>
 
+
+    <!-- 角色装饰 -->
+    <div class="relative max-w-7xl mx-auto px-4 mb-10">
+      <div class="glass-strong rounded-3xl p-8 overflow-hidden relative">
+        <img src="assets/character-gpt.png" alt="鸣潮角色" class="absolute right-0 top-0 h-full opacity-20 object-cover object-left" style="max-width:40%;">
+        <div class="relative z-10">
+          <h2 class="text-3xl font-black mb-3">加入菲比大家庭</h2>
+          <p class="text-slate-300 max-w-lg">与数千名鸣潮玩家一起，享受免费、稳定、持续更新的机器人服务。菲比陪你探索索拉里斯的每一个角落。</p>
+          <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="mt-5 inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-tide to-luna text-abyss font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 立即加群</a>
+        </div>
+      </div>
+    </div>
   <footer class="relative z-10 border-t border-white/10 bg-abyss/70 py-10">
     <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6 items-center">
       <div class="flex items-center gap-3"><i class="fa fa-star text-gold text-2xl"></i><h3 class="text-xl font-black">菲比 Bot 鸣潮机器人</h3></div>
@@ -347,6 +423,46 @@
       document.querySelectorAll('.collapsible').forEach(btn => btn.addEventListener('click', () => { btn.classList.toggle('active'); const p=btn.nextElementSibling; p.style.maxHeight = p.style.maxHeight ? null : p.scrollHeight + 'px'; }));
       const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); }), {threshold:.12});
       document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    });
+  </script>
+
+  <!-- 装饰背景 -->
+  <div class="decor-float"></div>
+  
+  <!-- 星星掉落 + 鼠标拖尾 JS -->
+  <script>
+    // === 星星掉落 ===
+    function createStar() {
+      const star = document.createElement('div');
+      star.className = 'star-fall';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+      const colors = ['rgba(101,255,240,.8)', 'rgba(184,156,255,.8)', 'rgba(255,217,138,.8)', '#fff'];
+      star.style.background = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(star);
+      star.addEventListener('animationend', () => star.remove());
+    }
+    setInterval(createStar, 300);
+
+    // === 鼠标拖尾 ===
+    const trailColors = ['#65fff0', '#b89cff', '#ffd98a', '#a579ff', '#65fff0'];
+    let trailIndex = 0;
+    let lastTrailTime = 0;
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastTrailTime < 30) return; // 节流
+      lastTrailTime = now;
+      
+      const trail = document.createElement('div');
+      trail.className = 'cursor-trail';
+      trail.style.left = e.clientX - 4 + 'px';
+      trail.style.top = e.clientY - 4 + 'px';
+      trail.style.background = trailColors[trailIndex % trailColors.length];
+      trail.style.boxShadow = `0 0 8px ${trailColors[trailIndex % trailColors.length]}`;
+      trailIndex++;
+      document.body.appendChild(trail);
+      trail.addEventListener('animationend', () => trail.remove());
     });
   </script>
 </body>
