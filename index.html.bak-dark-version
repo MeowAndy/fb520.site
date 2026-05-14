@@ -12,11 +12,11 @@
       theme: {
         extend: {
           colors: {
-            abyss: '#1a2332',
-            tide: '#4FC3F7',
-            luna: '#FFC107',
-            gold: '#FFB300',
-            phrolova: '#FF8A80'
+            abyss: '#141a30',
+            tide: '#65fff0',
+            luna: '#b89cff',
+            gold: '#ffd98a',
+            phrolova: '#a579ff'
           },
           boxShadow: {
             glow: '0 0 45px rgba(101,255,240,.22)',
@@ -27,28 +27,34 @@
     }
   </script>
   <style>
-    :root { color-scheme: light; }
+    :root { color-scheme: dark; }
     html { scroll-behavior: smooth; }
     body {
-      background: linear-gradient(135deg, #ffffff 0%, #fff9e6 45%, #e0f7fa 100%);
-      background-attachment: fixed;
+      background:
+        radial-gradient(circle at 16% 8%, rgba(255,215,100,.15), transparent 32%),
+        radial-gradient(circle at 78% 0%, rgba(101,200,255,.12), transparent 36%),
+        radial-gradient(circle at 52% 88%, rgba(255,180,100,.10), transparent 36%),
+        linear-gradient(135deg, #1a1f3a 0%, #232848 30%, #1e2444 60%, #181d38 100%);
       min-height: 100vh;
       overflow-x: hidden;
     }
-
+    .bg-noise::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      opacity: .22; mix-blend-mode: overlay;
+    }
     .glass {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+      backdrop-filter: blur(18px);
     }
     .glass-strong {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(255, 193, 7, 0.2);
-      box-shadow: 0 12px 40px rgba(255, 179, 0, 0.12);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(20,28,55,.75), rgba(35,42,72,.60));
+      border: 1px solid rgba(101,255,240,.18);
+      box-shadow: 0 24px 70px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.08);
+      backdrop-filter: blur(20px);
     }
     .tide-line {
       position: relative;
@@ -69,7 +75,7 @@
     @keyframes pulseRing { 0%,100% { transform: scale(1); opacity:.55; } 50% { transform: scale(1.08); opacity:.95; } }
     .fade-in { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
     .fade-in.show { opacity: 1; transform: translateY(0); }
-    .command { background: rgba(255,193,7,.1); border: 1px solid rgba(255,193,7,.3); color: #455A64; border-radius: 8px; }
+    .command { background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.14); color: #fff; }
     .copy-btn { transition: .2s ease; }
     .copy-btn:hover { transform: translateY(-1px); }
     .collapsible.active .chev { transform: rotate(180deg); }
@@ -78,8 +84,48 @@
     .nav-link::after { content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:#65fff0; transition:.25s; }
     .nav-link:hover::after { width:100%; }
 
-
-
+    /* === 星星掉落动画 === */
+    .star-fall {
+      position: fixed;
+      top: -10px;
+      width: 3px;
+      height: 3px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      box-shadow: 0 0 6px 2px rgba(101,255,240,.6), 0 0 12px 4px rgba(184,156,255,.3);
+      animation: starDrop linear forwards;
+    }
+    @keyframes starDrop {
+      0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+      70% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+    }
+    /* === 鼠标拖尾 === */
+    .cursor-trail {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      mix-blend-mode: screen;
+      animation: trailFade 0.6s ease-out forwards;
+    }
+    @keyframes trailFade {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.1); }
+    }
+    /* === Banner 背景图 === */
+    .hero-banner-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/banner-gpt.png') center/cover no-repeat;
+      opacity: 0.15;
+      border-radius: 2.2rem;
+      z-index: 0;
+    }
     .hero-character {
       position: absolute;
       right: -20px;
@@ -89,18 +135,33 @@
       z-index: 0;
       pointer-events: none;
     }
-
+    /* === 装饰浮动图 === */
+    .decor-float {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background: url('assets/waves-group.png') center bottom/cover no-repeat;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+    }
   </style>
 </head>
-<body class="text-slate-700 font-sans">
+<body class="bg-noise text-slate-100 font-sans">
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="orb w-64 h-64 bg-tide/10 left-[-80px] top-28"></div>
+    <div class="orb w-80 h-80 bg-luna/10 right-[-120px] top-8"></div>
+    <div class="orb w-72 h-72 bg-gold/10 left-[45%] bottom-[-120px]"></div>
+  </div>
 
-
-  <header class="sticky top-0 z-50 border-b border-amber-100 bg-white/80 backdrop-blur-xl shadow-sm">
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-abyss/70 backdrop-blur-xl">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="#top" class="flex items-center gap-3">
         <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-tide via-luna to-gold p-[1px] shadow-glow">
           <div class="w-full h-full rounded-2xl bg-abyss flex items-center justify-center">
-            <img src="assets/phoebe-avatar.jpg" alt="菲比" class="w-full h-full rounded-2xl object-cover">
+            <img src="assets/phoebe-avatar.png" alt="菲比" class="w-full h-full rounded-2xl object-cover">
           </div>
         </div>
         <div>
@@ -108,7 +169,7 @@
           <p class="text-xs text-tide/80">鸣潮免费分享机器人</p>
         </div>
       </a>
-      <nav class="hidden md:flex items-center gap-7 text-sm text-slate-600">
+      <nav class="hidden md:flex items-center gap-7 text-sm text-slate-300">
         <a class="nav-link hover:text-tide" href="#news">最新公告</a>
         <a class="nav-link hover:text-tide" href="#overview">功能全览</a>
         <a class="nav-link hover:text-tide" href="#features">功能介绍</a>
@@ -117,8 +178,8 @@
       </nav>
       <button id="menuBtn" class="md:hidden w-10 h-10 rounded-xl glass flex items-center justify-center"><i class="fa fa-bars"></i></button>
     </div>
-    <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-white/95">
-      <div class="px-4 py-4 grid gap-3 text-slate-600">
+    <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-abyss/95">
+      <div class="px-4 py-4 grid gap-3 text-slate-300">
         <a href="#news">最新公告</a><a href="#overview">功能全览</a><a href="#features">功能介绍</a><a href="#add">添加方式</a><a href="#rules">服务条例</a>
       </div>
     </div>
@@ -134,18 +195,17 @@
           <h2 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
             与<span class="text-transparent bg-clip-text bg-gradient-to-r from-tide via-luna to-gold">菲比</span>一起，<br />听见群聊里的鸣潮。
           </h2>
-          <p class="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">菲比 Bot 是面向鸣潮玩家的免费机器人平台，集成账号、查询、签到、评分与多游戏服务，保持公益初心，持续陪伴每一个热爱索拉里斯的群聊。</p>
+          <p class="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl">菲比 Bot 是面向鸣潮玩家的免费机器人平台，集成账号、查询、签到、评分与多游戏服务，保持公益初心，持续陪伴每一个热爱索拉里斯的群聊。</p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4">
-            <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-white font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 加入用户审核群</a>
+            <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-tide to-luna text-abyss font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 加入用户审核群</a>
             <a href="#features" class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-2xl glass font-bold hover:border-tide/40 transition"><i class="fa fa-magic"></i> 查看功能</a>
           </div>
         </div>
         <div class="fade-in relative">
           <div class="absolute inset-0 bg-gradient-to-br from-tide/25 via-luna/20 to-gold/10 rounded-[2.2rem] blur-2xl"></div>
-          <div class="relative glass-strong rounded-[2.2rem] p-6 md:p-8 tide-line">
+          <div class="relative glass-strong rounded-[2.2rem] p-6 md:p-8 tide-line"><div class="hero-banner-bg"></div>
             <div class="relative aspect-[4/5] rounded-[1.8rem] overflow-hidden bg-gradient-to-br from-[#111a3b] via-[#1d2148] to-[#080b18] border border-white/10">
-              <div class="absolute inset-0 opacity-30" style="background: radial-gradient(circle at 50% 18%, rgba(255,193,7,.3), transparent 28%), radial-gradient(circle at 70% 70%, rgba(79,195,247,.2), transparent 35%);"></div>
-              <img src="assets/phoebe-fullbody.jpg" alt="鸣潮菲比" class="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 opacity-40 pointer-events-none">
+              <div class="absolute inset-0 opacity-40" style="background: radial-gradient(circle at 50% 18%, rgba(101,255,240,.45), transparent 28%), radial-gradient(circle at 70% 70%, rgba(184,156,255,.38), transparent 35%);"></div>
               <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-abyss via-abyss/60 to-transparent"></div>
               <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
                 <div class="w-32 h-32 rounded-full border border-tide/50 shadow-glow flex items-center justify-center mb-7 wave-ring">
@@ -155,11 +215,11 @@
                 </div>
                 <h3 class="text-4xl font-black tracking-widest">PHOEBE</h3>
                 <p class="text-tide mt-2 tracking-[.4em] text-xs">WUTHERING WAVES BOT</p>
-                
+                <img src="assets/phoebe-fullbody.png" alt="菲比立绘" class="mt-4 w-40 h-auto mx-auto opacity-90 drop-shadow-[0_0_15px_rgba(101,255,240,.4)]">
                 <div class="mt-8 grid grid-cols-3 gap-3 w-full">
-                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-tide">免费</p><p class="text-xs text-slate-500">公益运行</p></div>
-                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-luna">fb</p><p class="text-xs text-slate-500">触发前缀</p></div>
-                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-gold">多游</p><p class="text-xs text-slate-500">插件支持</p></div>
+                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-tide">免费</p><p class="text-xs text-slate-400">公益运行</p></div>
+                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-luna">fb</p><p class="text-xs text-slate-400">触发前缀</p></div>
+                  <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-gold">多游</p><p class="text-xs text-slate-400">插件支持</p></div>
                 </div>
               </div>
             </div>
@@ -172,7 +232,7 @@
       <section id="news" class="fade-in">
         <SectionTitle icon="bullhorn" title="最新公告"></SectionTitle>
         <div class="glass-strong rounded-3xl p-6 md:p-8">
-          <ul class="grid gap-4 text-slate-700">
+          <ul class="grid gap-4 text-slate-200">
             <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>菲比Bot是免费Bot，从不会收取任何费用</span></li>
             <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>菲比只服务现在市面上的游戏服务（鸣潮、原神、崩铁、绝区零、终末地、三角洲、二重螺旋...）</span></li>
             <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>详细功能发送 <code class="command px-2 py-1 rounded-lg">fb功能</code> 进行查看</span></li>
@@ -183,7 +243,7 @@
 
       <section class="fade-in glass-strong rounded-3xl p-6 md:p-8 border-tide/30">
         <h2 class="text-2xl md:text-3xl font-black mb-6 flex items-center gap-3"><i class="fa fa-info-circle text-tide"></i>菲比Bot | 鸣潮机器人 说明</h2>
-        <ul class="grid gap-3 text-slate-700">
+        <ul class="grid gap-3 text-slate-200">
           <li class="flex gap-3"><i class="fa fa-check text-gold mt-1"></i><span>常态部署，会持续保持功能正常（会出现宕机问题是正常，一般是在维护，好了会直接恢复）</span></li>
           <li class="flex gap-3"><i class="fa fa-check text-gold mt-1"></i><span>菲比Bot是免费Bot，群聊私聊都可以使用，所以不准出现辱骂的现象</span></li>
           <li class="flex gap-3"><i class="fa fa-check text-gold mt-1"></i><span>菲比Bot需要进入 <code class="command px-2 py-1 rounded-lg">小菲小豹用户审核群</code> 审核通过后，按照要求进行 <code class="command px-2 py-1 rounded-lg">邀请</code></span></li>
@@ -194,8 +254,8 @@
       <section id="login" class="fade-in">
         <SectionTitle icon="lock" title="登录说明"></SectionTitle>
         <div class="glass rounded-3xl p-6 md:p-8">
-          <p class="text-slate-600 mb-5">当前策略使用库街区app登录，如果希望同时登录则只能在库街区登录后手动抓包</p>
-          <div class="rounded-2xl border border-tide/25 bg-tide/10 p-5 text-slate-700">
+          <p class="text-slate-300 mb-5">当前策略使用库街区app登录，如果希望同时登录则只能在库街区登录后手动抓包</p>
+          <div class="rounded-2xl border border-tide/25 bg-tide/10 p-5 text-slate-200">
             <p><i class="fa fa-lightbulb-o text-gold mr-2"></i>完全按照该教程保证100%成功，约80%的用户读完教程可以正确进行登录！</p>
             <p class="mt-3"><i class="fa fa-lightbulb-o text-gold mr-2"></i>如果需要做到同时登录的情况：发送 <code class="command px-2 py-1 rounded-lg">fb如何同时登录</code> 可查看教程</p>
           </div>
@@ -207,14 +267,14 @@
         <div class="grid md:grid-cols-2 gap-6">
           <div class="glass rounded-3xl p-6 md:p-8">
             <h3 class="text-2xl font-black text-luna mb-5">添加方式</h3>
-            <p class="text-slate-600 mb-3">--------------------------------------</p>
-            <p class="text-slate-600 mb-3">为方便邀请 <code class="command px-2 py-1 rounded-lg">菲比Bot</code>，请加审核群</p>
-            <p class="text-slate-600 mb-6">--------------------------------------</p>
-            <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-white font-bold shadow-glow"><i class="fa fa-qq"></i> 加入用户审核群</a>
+            <p class="text-slate-300 mb-3">--------------------------------------</p>
+            <p class="text-slate-300 mb-3">为方便邀请 <code class="command px-2 py-1 rounded-lg">菲比Bot</code>，请加审核群</p>
+            <p class="text-slate-300 mb-6">--------------------------------------</p>
+            <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-luna to-tide text-abyss font-bold shadow-glow"><i class="fa fa-qq"></i> 加入用户审核群</a>
           </div>
           <div class="glass rounded-3xl p-6 md:p-8">
             <h3 class="text-2xl font-black text-luna mb-5">群聊要求</h3>
-            <ul class="space-y-3 text-slate-600">
+            <ul class="space-y-3 text-slate-300">
               <li class="flex gap-3"><i class="fa fa-angle-right text-tide mt-1"></i><span>必须有人使用鸣潮功能，避免多鸣潮机器人共群</span></li>
               <li class="flex gap-3"><i class="fa fa-angle-right text-tide mt-1"></i><span>不得终止续费其他Bot并改为使用菲比Bot，且不得与付费Bot共存</span></li>
               <li class="flex gap-3"><i class="fa fa-angle-right text-tide mt-1"></i><span>群活跃人数达到5+最好是，或你是我的熟人</span></li>
@@ -228,7 +288,7 @@
       <section id="rules" class="fade-in">
         <SectionTitle icon="exclamation-triangle" title="服务条例"></SectionTitle>
         <div class="glass rounded-3xl p-6 md:p-8">
-          <ul class="space-y-3 text-slate-600">
+          <ul class="space-y-3 text-slate-300">
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>踢出群聊后拉黑群</span></li>
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>鸣潮等各种游戏功能一直开放，其他功能（如AI）开关权限在主人手上</span></li>
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>需要启用寻找反馈群群主</span></li>
@@ -247,15 +307,15 @@
             <div>
               <p class="text-tide font-bold mb-3 tracking-[.25em] text-sm">NOT ONLY WUTHERING WAVES</p>
               <h2 class="text-3xl md:text-5xl font-black leading-tight">不只是鸣潮，菲比是一整套群聊游戏与娱乐服务。</h2>
-              <p class="mt-5 text-slate-600 leading-relaxed">菲比基于 GS Core 与 AstrBot 生态，覆盖多款二游查询、签到、评分、角色面板、资料服务，也提供链接解析、表情包、AI 聊天、群管和群日常分析等实用能力。你可以把它理解成一个“游戏资料站 + 群聊工具箱”。</p>
+              <p class="mt-5 text-slate-300 leading-relaxed">菲比基于 GS Core 与 AstrBot 生态，覆盖多款二游查询、签到、评分、角色面板、资料服务，也提供链接解析、表情包、AI 聊天、群管和群日常分析等实用能力。你可以把它理解成一个“游戏资料站 + 群聊工具箱”。</p>
               <div class="mt-6 grid grid-cols-3 gap-3 text-center">
-                <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-tide">7+</p><p class="text-xs text-slate-500">游戏方向</p></div>
-                <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-luna">AI</p><p class="text-xs text-slate-500">聊天与工具</p></div>
-                <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-gold">免费</p><p class="text-xs text-slate-500">公益运行</p></div>
+                <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-tide">7+</p><p class="text-xs text-slate-400">游戏方向</p></div>
+                <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-luna">AI</p><p class="text-xs text-slate-400">聊天与工具</p></div>
+                <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-gold">免费</p><p class="text-xs text-slate-400">公益运行</p></div>
               </div>
             </div>
             <div class="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-glow">
-              <img src="assets/waves-group.jpg" alt="鸣潮角色合照" class="w-full h-full object-cover">
+              <img src="assets/waves-group.png" alt="鸣潮角色合照" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-abyss/75 via-transparent to-transparent"></div>
               <div class="absolute bottom-5 left-5 right-5">
                 <p class="text-sm text-tide">核心方向</p>
@@ -266,21 +326,21 @@
         </div>
 
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/waves-group.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="鸣潮"><img src="assets/waves.svg" class="w-full h-36 object-cover" alt="鸣潮"><div class="p-5"><h3 class="text-xl font-black text-tide">鸣潮服务</h3><p class="text-slate-600 text-sm mt-2">WutheringWavesUID、角色面板、库街区登录、自动签到、声骸评分、资料查询。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">fb功能</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/genshin-group.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="原神"><img src="assets/genshin.svg" class="w-full h-36 object-cover" alt="原神"><div class="p-5"><h3 class="text-xl font-black text-gold">原神服务</h3><p class="text-slate-600 text-sm mt-2">GenshinUID 系列查询能力，支持角色、账号资料、养成与游戏数据相关功能。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">ys帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/starrail-group.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="崩铁"><img src="assets/starrail.svg" class="w-full h-36 object-cover" alt="星铁"><div class="p-5"><h3 class="text-xl font-black text-blue-200">崩坏：星穹铁道</h3><p class="text-slate-600 text-sm mt-2">星铁相关账号、角色与资料查询能力，适合群内快速查看养成信息。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">xt帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/zzz-group.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="绝区零"><img src="assets/zzz.svg" class="w-full h-36 object-cover" alt="绝区零"><div class="p-5"><h3 class="text-xl font-black text-yellow-200">绝区零服务</h3><p class="text-slate-600 text-sm mt-2">ZZZeroUID 支持绝区零相关查询、角色资料和游戏信息服务。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">z3帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/delta-group.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="三角洲"><img src="assets/delta.svg" class="w-full h-36 object-cover" alt="三角洲"><div class="p-5"><h3 class="text-xl font-black text-green-200">三角洲行动</h3><p class="text-slate-600 text-sm mt-2">三角洲方向的游戏资料与群内辅助查询能力，服务更多玩家圈子。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">delta帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/ba-group.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="碧蓝档案"><img src="assets/ba.svg" class="w-full h-36 object-cover" alt="BA"><div class="p-5"><h3 class="text-xl font-black text-sky-200">BA / 蔚蓝档案</h3><p class="text-slate-600 text-sm mt-2">BA 方向资料查询与群聊辅助能力，让群内二游玩家不止一种选择。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">ba帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/dna-group.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="二重螺旋"><img src="assets/dna.svg" class="w-full h-36 object-cover" alt="二重螺旋"><div class="p-5"><h3 class="text-xl font-black text-pink-200">二重螺旋</h3><p class="text-slate-600 text-sm mt-2">DNAUID 相关能力，覆盖二重螺旋资料、查询与未来扩展功能。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">dna帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/astrbot-group.jpg" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="AstrBot"><img src="assets/astrbot.svg" class="w-full h-36 object-cover" alt="AstrBot"><div class="p-5"><h3 class="text-xl font-black text-luna">AstrBot 娱乐工具</h3><p class="text-slate-600 text-sm mt-2">AI 聊天、链接解析、表情包、群管、群日常分析、随机图、一言、今天吃什么等。</p><p class="mt-3 text-xs text-slate-500">娱乐功能与游戏功能分离运行</p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/waves-group.png" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="鸣潮"><img src="assets/waves.svg" class="w-full h-36 object-cover" alt="鸣潮"><div class="p-5"><h3 class="text-xl font-black text-tide">鸣潮服务</h3><p class="text-slate-300 text-sm mt-2">WutheringWavesUID、角色面板、库街区登录、自动签到、声骸评分、资料查询。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">fb功能</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/genshin-group.png" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="原神"><img src="assets/genshin.svg" class="w-full h-36 object-cover" alt="原神"><div class="p-5"><h3 class="text-xl font-black text-gold">原神服务</h3><p class="text-slate-300 text-sm mt-2">GenshinUID 系列查询能力，支持角色、账号资料、养成与游戏数据相关功能。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">ys帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/starrail-group.png" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="崩铁"><img src="assets/starrail.svg" class="w-full h-36 object-cover" alt="星铁"><div class="p-5"><h3 class="text-xl font-black text-blue-200">崩坏：星穹铁道</h3><p class="text-slate-300 text-sm mt-2">星铁相关账号、角色与资料查询能力，适合群内快速查看养成信息。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">xt帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/zzz-group.png" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="绝区零"><img src="assets/zzz.svg" class="w-full h-36 object-cover" alt="绝区零"><div class="p-5"><h3 class="text-xl font-black text-yellow-200">绝区零服务</h3><p class="text-slate-300 text-sm mt-2">ZZZeroUID 支持绝区零相关查询、角色资料和游戏信息服务。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">z3帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/delta.svg" class="w-full h-36 object-cover" alt="三角洲"><div class="p-5"><h3 class="text-xl font-black text-green-200">三角洲行动</h3><p class="text-slate-300 text-sm mt-2">三角洲方向的游戏资料与群内辅助查询能力，服务更多玩家圈子。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">delta帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/ba.svg" class="w-full h-36 object-cover" alt="BA"><div class="p-5"><h3 class="text-xl font-black text-sky-200">BA / 蔚蓝档案</h3><p class="text-slate-300 text-sm mt-2">BA 方向资料查询与群聊辅助能力，让群内二游玩家不止一种选择。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">ba帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/dna.svg" class="w-full h-36 object-cover" alt="二重螺旋"><div class="p-5"><h3 class="text-xl font-black text-pink-200">二重螺旋</h3><p class="text-slate-300 text-sm mt-2">DNAUID 相关能力，覆盖二重螺旋资料、查询与未来扩展功能。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">dna帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/astrbot.svg" class="w-full h-36 object-cover" alt="AstrBot"><div class="p-5"><h3 class="text-xl font-black text-luna">AstrBot 娱乐工具</h3><p class="text-slate-300 text-sm mt-2">AI 聊天、链接解析、表情包、群管、群日常分析、随机图、一言、今天吃什么等。</p><p class="mt-3 text-xs text-slate-400">娱乐功能与游戏功能分离运行</p></div></div>
         </div>
 
         <div class="mt-6 glass rounded-3xl p-6 md:p-8">
           <div class="grid md:grid-cols-3 gap-5">
-            <div class="rounded-2xl bg-white/5 border border-white/10 p-5"><i class="fa fa-database text-tide text-2xl"></i><h3 class="mt-3 font-black text-lg">游戏资料查询</h3><p class="text-slate-500 text-sm mt-2">角色、账号、评分、面板、签到等功能按游戏生态分别提供。</p></div>
-            <div class="rounded-2xl bg-white/5 border border-white/10 p-5"><i class="fa fa-play-circle text-gold text-2xl"></i><h3 class="mt-3 font-black text-lg">链接与媒体解析</h3><p class="text-slate-500 text-sm mt-2">支持 B站、抖音、小红书、快手、油管等平台链接解析，适合群聊分享。</p></div>
-            <div class="rounded-2xl bg-white/5 border border-white/10 p-5"><i class="fa fa-comments text-luna text-2xl"></i><h3 class="mt-3 font-black text-lg">AI 与群聊工具</h3><p class="text-slate-500 text-sm mt-2">AI 聊天、长期记忆、表情包、群管、群日报等能力，按需开放。</p></div>
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-5"><i class="fa fa-database text-tide text-2xl"></i><h3 class="mt-3 font-black text-lg">游戏资料查询</h3><p class="text-slate-400 text-sm mt-2">角色、账号、评分、面板、签到等功能按游戏生态分别提供。</p></div>
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-5"><i class="fa fa-play-circle text-gold text-2xl"></i><h3 class="mt-3 font-black text-lg">链接与媒体解析</h3><p class="text-slate-400 text-sm mt-2">支持 B站、抖音、小红书、快手、油管等平台链接解析，适合群聊分享。</p></div>
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-5"><i class="fa fa-comments text-luna text-2xl"></i><h3 class="mt-3 font-black text-lg">AI 与群聊工具</h3><p class="text-slate-400 text-sm mt-2">AI 聊天、长期记忆、表情包、群管、群日报等能力，按需开放。</p></div>
           </div>
         </div>
       </section>
@@ -289,7 +349,7 @@
         <SectionTitle icon="magic" title="功能介绍"></SectionTitle>
         <div class="space-y-5">
           <FeaturePanel title="基本功能" icon="gamepad" color="text-tide">
-            <p class="text-slate-600 mb-5">触发前缀为 <code class="command px-2 py-1 rounded-lg">fb</code></p>
+            <p class="text-slate-300 mb-5">触发前缀为 <code class="command px-2 py-1 rounded-lg">fb</code></p>
             <div class="grid md:grid-cols-2 gap-5">
               <div class="glass rounded-2xl p-5">
                 <h4 class="font-bold mb-3">示例指令：</h4>
@@ -301,11 +361,11 @@
               </div>
               <div class="glass rounded-2xl p-5">
                 <h4 class="font-bold mb-3">核心框架 & 其他游戏插件：</h4>
-                <ul class="space-y-1 text-slate-600">
+                <ul class="space-y-1 text-slate-300">
                   <li>核心框架：Genshin-bots/gsuid_core</li><li>鸣潮插件：XutheringWavesUID</li><li>评分插件：ScoreEcho</li><li>签到插件：RoverSign</li>
                 </ul>
-                <div class="mt-4 pt-4 border-t border-white/10 text-slate-600">
-                  <p class="text-sm text-slate-500 mb-2">同基于gsuid_core的其他Bot指令：</p>
+                <div class="mt-4 pt-4 border-t border-white/10 text-slate-300">
+                  <p class="text-sm text-slate-400 mb-2">同基于gsuid_core的其他Bot指令：</p>
                   <p>原神：<code class="command px-2 py-1 rounded-lg">ys帮助</code>　星铁：<code class="command px-2 py-1 rounded-lg">xt帮助</code></p>
                   <p class="mt-2">绝区零：<code class="command px-2 py-1 rounded-lg">z3帮助</code>　三角洲：<code class="command px-2 py-1 rounded-lg">delta帮助</code></p>
                   <p class="mt-2">BA：<code class="command px-2 py-1 rounded-lg">ba帮助</code>　二重螺旋：<code class="command px-2 py-1 rounded-lg">dna帮助</code></p>
@@ -313,11 +373,11 @@
               </div>
             </div>
           </FeaturePanel>
-          <FeaturePanel title="其他Bot指令" icon="robot" color="text-luna"><div class="py-10 text-center text-slate-500 text-lg">暂无</div></FeaturePanel>
+          <FeaturePanel title="其他Bot指令" icon="robot" color="text-luna"><div class="py-10 text-center text-slate-400 text-lg">暂无</div></FeaturePanel>
           <FeaturePanel title="菲比框架特性" icon="cogs" color="text-gold">
             <div class="grid md:grid-cols-2 gap-6">
-              <div><h4 class="font-bold text-gold mb-3">核心特性：</h4><ul class="space-y-2 text-slate-600"><li>--------------------------------------</li><li>菲比Bot承诺拥有的免费鸣潮机器人</li><li>如果需要 <code class="command px-2 py-1 rounded-lg">娱乐功能</code> 如：视频解析、表情包等</li><li>请先通过用户审核后，进群邀请 <code class="command px-2 py-1 rounded-lg">凌阳娱乐</code></li><li>目前二游游戏功能与娱乐功能是分离的，也不会合并。</li><li>--------------------------------------</li></ul></div>
-              <div><h4 class="font-bold text-gold mb-3">开发信息：</h4><ul class="space-y-2 text-slate-600"><li><i class="fa fa-tachometer text-tide mr-2"></i>16-16 Linux服务器</li><li><i class="fa fa-plus-circle text-tide mr-2"></i>Ai功能请联系菲比Bot部署这开启！</li></ul></div>
+              <div><h4 class="font-bold text-gold mb-3">核心特性：</h4><ul class="space-y-2 text-slate-300"><li>--------------------------------------</li><li>菲比Bot承诺拥有的免费鸣潮机器人</li><li>如果需要 <code class="command px-2 py-1 rounded-lg">娱乐功能</code> 如：视频解析、表情包等</li><li>请先通过用户审核后，进群邀请 <code class="command px-2 py-1 rounded-lg">凌阳娱乐</code></li><li>目前二游游戏功能与娱乐功能是分离的，也不会合并。</li><li>--------------------------------------</li></ul></div>
+              <div><h4 class="font-bold text-gold mb-3">开发信息：</h4><ul class="space-y-2 text-slate-300"><li><i class="fa fa-tachometer text-tide mr-2"></i>16-16 Linux服务器</li><li><i class="fa fa-plus-circle text-tide mr-2"></i>Ai功能请联系菲比Bot部署这开启！</li></ul></div>
             </div>
           </FeaturePanel>
         </div>
@@ -332,15 +392,15 @@
         <img src="assets/character-gpt.png" alt="鸣潮角色" class="absolute right-0 top-0 h-full opacity-20 object-cover object-left" style="max-width:40%;">
         <div class="relative z-10">
           <h2 class="text-3xl font-black mb-3">加入菲比大家庭</h2>
-          <p class="text-slate-600 max-w-lg">与数千名鸣潮玩家一起，享受免费、稳定、持续更新的机器人服务。菲比陪你探索索拉里斯的每一个角落。</p>
-          <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="mt-5 inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-white font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 立即加群</a>
+          <p class="text-slate-300 max-w-lg">与数千名鸣潮玩家一起，享受免费、稳定、持续更新的机器人服务。菲比陪你探索索拉里斯的每一个角落。</p>
+          <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="mt-5 inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-tide to-luna text-abyss font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 立即加群</a>
         </div>
       </div>
     </div>
   <footer class="relative z-10 border-t border-white/10 bg-abyss/70 py-10">
     <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6 items-center">
       <div class="flex items-center gap-3"><i class="fa fa-star text-gold text-2xl"></i><h3 class="text-xl font-black">菲比 Bot 鸣潮机器人</h3></div>
-      <div class="flex gap-5 text-slate-600"><i class="fa fa-qq text-xl"></i><i class="fa fa-github text-xl"></i><i class="fa fa-envelope text-xl"></i></div>
+      <div class="flex gap-5 text-slate-300"><i class="fa fa-qq text-xl"></i><i class="fa fa-github text-xl"></i><i class="fa fa-envelope text-xl"></i></div>
     </div>
     <div class="max-w-7xl mx-auto px-4 mt-6 pt-6 border-t border-white/10 text-center text-slate-500 text-sm">
       <p>© 2025 菲比 Bot 保留所有权利 | 免费开源机器人，仅用于交流学习</p>
@@ -351,7 +411,7 @@
   <template id="section-title-template"></template>
   <script>
     function SectionTitle({icon, title}){return `<div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-${icon}"></i></div><h2 class="text-2xl md:text-3xl font-black">${title}</h2></div>`}
-    function FeaturePanel({title, icon, color}, content){return `<div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black ${color} flex items-center gap-3"><i class="fa fa-${icon}"></i>${title}</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-white/10">${content}</div></div></div>`}
+    function FeaturePanel({title, icon, color}, content){return `<div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black ${color} flex items-center gap-3"><i class="fa fa-${icon}"></i>${title}</span><i class="fa fa-chevron-down chev transition-transform text-slate-400"></i></button><div class="panel"><div class="p-6 border-t border-white/10">${content}</div></div></div>`}
     function Command({text}){return `<div class="flex items-center justify-between gap-3"><code class="command px-3 py-2 rounded-xl">${text}</code><button class="copy-btn px-3 py-2 rounded-xl bg-tide/15 hover:bg-tide/25 text-tide text-sm" data-command="${text}"><i class="fa fa-copy mr-1"></i>复制</button></div>`}
     document.querySelectorAll('SectionTitle').forEach(el => el.outerHTML = SectionTitle({icon: el.getAttribute('icon'), title: el.getAttribute('title')}));
     document.querySelectorAll('FeaturePanel').forEach(el => el.outerHTML = FeaturePanel({title: el.getAttribute('title'), icon: el.getAttribute('icon'), color: el.getAttribute('color')}, el.innerHTML));
@@ -367,9 +427,44 @@
     });
   </script>
 
-
+  <!-- 装饰背景 -->
+  <div class="decor-float"></div>
+  
   <!-- 星星掉落 + 鼠标拖尾 JS -->
   <script>
+    // === 星星掉落 ===
+    function createStar() {
+      const star = document.createElement('div');
+      star.className = 'star-fall';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+      const colors = ['rgba(101,255,240,.8)', 'rgba(184,156,255,.8)', 'rgba(255,217,138,.8)', '#fff'];
+      star.style.background = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(star);
+      star.addEventListener('animationend', () => star.remove());
+    }
+    setInterval(createStar, 300);
+
+    // === 鼠标拖尾 ===
+    const trailColors = ['#65fff0', '#b89cff', '#ffd98a', '#a579ff', '#65fff0'];
+    let trailIndex = 0;
+    let lastTrailTime = 0;
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastTrailTime < 30) return; // 节流
+      lastTrailTime = now;
+      
+      const trail = document.createElement('div');
+      trail.className = 'cursor-trail';
+      trail.style.left = e.clientX - 4 + 'px';
+      trail.style.top = e.clientY - 4 + 'px';
+      trail.style.background = trailColors[trailIndex % trailColors.length];
+      trail.style.boxShadow = `0 0 8px ${trailColors[trailIndex % trailColors.length]}`;
+      trailIndex++;
+      document.body.appendChild(trail);
+      trail.addEventListener('animationend', () => trail.remove());
+    });
   </script>
 </body>
 </html>
