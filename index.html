@@ -12,7 +12,7 @@
       theme: {
         extend: {
           colors: {
-            abyss: '#070914',
+            abyss: '#141a30',
             tide: '#65fff0',
             luna: '#b89cff',
             gold: '#ffd98a',
@@ -31,13 +31,10 @@
     html { scroll-behavior: smooth; }
     body {
       background:
-        radial-gradient(circle at 16% 8%, rgba(101,255,240,.22), transparent 32%),
-        radial-gradient(circle at 78% 0%, rgba(184,156,255,.26), transparent 36%),
-        radial-gradient(circle at 52% 88%, rgba(255,217,138,.12), transparent 36%),
-        radial-gradient(circle at 50% 50%, rgba(101,255,240,.05), transparent 60%),
-        url('assets/waves-group.png') center/cover no-repeat fixed,
-        linear-gradient(135deg, #050810 0%, #0d1530 52%, #070a16 100%);
-      background-blend-mode: normal, normal, normal, normal, overlay, normal;
+        radial-gradient(circle at 16% 8%, rgba(255,215,100,.15), transparent 32%),
+        radial-gradient(circle at 78% 0%, rgba(101,200,255,.12), transparent 36%),
+        radial-gradient(circle at 52% 88%, rgba(255,180,100,.10), transparent 36%),
+        linear-gradient(135deg, #1a1f3a 0%, #232848 30%, #1e2444 60%, #181d38 100%);
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -54,7 +51,7 @@
       backdrop-filter: blur(18px);
     }
     .glass-strong {
-      background: linear-gradient(135deg, rgba(11,16,34,.78), rgba(25,31,58,.58));
+      background: linear-gradient(135deg, rgba(20,28,55,.75), rgba(35,42,72,.60));
       border: 1px solid rgba(101,255,240,.18);
       box-shadow: 0 24px 70px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.08);
       backdrop-filter: blur(20px);
@@ -145,7 +142,7 @@
       left: 0;
       width: 100%;
       height: 300px;
-      background: url('assets/decor-gpt.png') center bottom/cover no-repeat;
+      background: url('assets/waves-group.png') center bottom/cover no-repeat;
       opacity: 0.06;
       pointer-events: none;
       z-index: 0;
@@ -329,10 +326,10 @@
         </div>
 
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/waves.svg" class="w-full h-36 object-cover" alt="鸣潮"><div class="p-5"><h3 class="text-xl font-black text-tide">鸣潮服务</h3><p class="text-slate-300 text-sm mt-2">WutheringWavesUID、角色面板、库街区登录、自动签到、声骸评分、资料查询。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">fb功能</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/genshin.svg" class="w-full h-36 object-cover" alt="原神"><div class="p-5"><h3 class="text-xl font-black text-gold">原神服务</h3><p class="text-slate-300 text-sm mt-2">GenshinUID 系列查询能力，支持角色、账号资料、养成与游戏数据相关功能。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">ys帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/starrail.svg" class="w-full h-36 object-cover" alt="星铁"><div class="p-5"><h3 class="text-xl font-black text-blue-200">崩坏：星穹铁道</h3><p class="text-slate-300 text-sm mt-2">星铁相关账号、角色与资料查询能力，适合群内快速查看养成信息。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">xt帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/zzz.svg" class="w-full h-36 object-cover" alt="绝区零"><div class="p-5"><h3 class="text-xl font-black text-yellow-200">绝区零服务</h3><p class="text-slate-300 text-sm mt-2">ZZZeroUID 支持绝区零相关查询、角色资料和游戏信息服务。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">z3帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/waves-group.png" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="鸣潮"><img src="assets/waves.svg" class="w-full h-36 object-cover" alt="鸣潮"><div class="p-5"><h3 class="text-xl font-black text-tide">鸣潮服务</h3><p class="text-slate-300 text-sm mt-2">WutheringWavesUID、角色面板、库街区登录、自动签到、声骸评分、资料查询。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">fb功能</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/genshin-group.png" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="原神"><img src="assets/genshin.svg" class="w-full h-36 object-cover" alt="原神"><div class="p-5"><h3 class="text-xl font-black text-gold">原神服务</h3><p class="text-slate-300 text-sm mt-2">GenshinUID 系列查询能力，支持角色、账号资料、养成与游戏数据相关功能。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">ys帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/starrail-group.png" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="崩铁"><img src="assets/starrail.svg" class="w-full h-36 object-cover" alt="星铁"><div class="p-5"><h3 class="text-xl font-black text-blue-200">崩坏：星穹铁道</h3><p class="text-slate-300 text-sm mt-2">星铁相关账号、角色与资料查询能力，适合群内快速查看养成信息。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">xt帮助</code></p></div></div>
+          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/zzz-group.png" class="absolute inset-0 w-full h-full object-cover opacity-20 rounded-2xl" alt="绝区零"><img src="assets/zzz.svg" class="w-full h-36 object-cover" alt="绝区零"><div class="p-5"><h3 class="text-xl font-black text-yellow-200">绝区零服务</h3><p class="text-slate-300 text-sm mt-2">ZZZeroUID 支持绝区零相关查询、角色资料和游戏信息服务。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">z3帮助</code></p></div></div>
           <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/delta.svg" class="w-full h-36 object-cover" alt="三角洲"><div class="p-5"><h3 class="text-xl font-black text-green-200">三角洲行动</h3><p class="text-slate-300 text-sm mt-2">三角洲方向的游戏资料与群内辅助查询能力，服务更多玩家圈子。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">delta帮助</code></p></div></div>
           <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/ba.svg" class="w-full h-36 object-cover" alt="BA"><div class="p-5"><h3 class="text-xl font-black text-sky-200">BA / 蔚蓝档案</h3><p class="text-slate-300 text-sm mt-2">BA 方向资料查询与群聊辅助能力，让群内二游玩家不止一种选择。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">ba帮助</code></p></div></div>
           <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition"><img src="assets/dna.svg" class="w-full h-36 object-cover" alt="二重螺旋"><div class="p-5"><h3 class="text-xl font-black text-pink-200">二重螺旋</h3><p class="text-slate-300 text-sm mt-2">DNAUID 相关能力，覆盖二重螺旋资料、查询与未来扩展功能。</p><p class="mt-3 text-xs text-slate-400">常用：<code class="command px-2 py-1 rounded">dna帮助</code></p></div></div>
