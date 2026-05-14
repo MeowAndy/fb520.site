@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="菲比Bot｜鸣潮免费分享机器人，公益运行，支持鸣潮、原神、崩铁、绝区零、三角洲、BA、二重螺旋与 AstrBot 娱乐工具。" />
+  <link rel="icon" type="image/jpeg" href="assets/phoebe-avatar.jpg">
   <title>菲比 Bot｜鸣潮机器人官方平台</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -94,9 +95,82 @@
       pointer-events: none;
     }
 
+
+    /* === 开场动画 === */
+    .splash-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: linear-gradient(135deg, #fff9e6, #e0f7fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .splash-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .splash-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      animation: splashBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      box-shadow: 0 8px 32px rgba(255, 179, 0, 0.3);
+    }
+    @keyframes splashBounce {
+      0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+      60% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    /* === 星掉落 === */
+    .star-fall {
+      position: fixed;
+      top: -10px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 100;
+      animation: starDrop linear forwards;
+    }
+    @keyframes starDrop {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(100vh); }
+    }
+    /* === 鼠标拖尾 === */
+    .cursor-trail {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 100;
+      animation: trailFade 0.5s ease-out forwards;
+    }
+    @keyframes trailFade {
+      0% { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.2); }
+    }
+    /* === 背景菲比 === */
+    .bg-phoebe {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: url('assets/phoebe-fullbody.jpg') center/cover no-repeat;
+      filter: blur(30px) brightness(1.1);
+      opacity: 0.15;
+    }
   </style>
 </head>
 <body class="text-slate-700 font-sans">
+  <!-- 背景菲比模糊图 -->
+  <div class="bg-phoebe"></div>
+  <!-- 开场动画 -->
+  <div class="splash-overlay" id="splash">
+    <img src="assets/phoebe-avatar.jpg" alt="菲比" class="splash-avatar">
+  </div>
+
 
 
   <header class="sticky top-0 z-50 border-b border-amber-100 bg-white/80 backdrop-blur-xl shadow-sm">
@@ -136,7 +210,7 @@
             <i class="fa fa-heartbeat"></i><span>公益运行 · 免费使用 · 鸣潮优先</span>
           </div>
           <h2 class="text-4xl md:text-6xl lg:text-7xl font-black leading-tight">
-            与<span class="text-transparent bg-clip-text bg-gradient-to-r from-tide via-luna to-gold">菲比</span>一起，<br />听见群聊里的鸣潮。
+            与<span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-sky-400 to-amber-500">菲比</span>一起<br />听见群聊里的鸣潮
           </h2>
           <p class="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">菲比 Bot 是面向鸣潮玩家的免费机器人平台，集成账号、查询、签到、评分与多游戏服务，保持公益初心，持续陪伴每一个热爱索拉里斯的群聊。</p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4">
@@ -223,7 +297,7 @@
         <div class="glass rounded-3xl p-6 md:p-8">
           <ul class="space-y-3 text-slate-600">
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>踢出群聊后拉黑群</span></li>
-            <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>鸣潮等各种游戏功能一直开放，其他功能（如AI）开关权限在主人手上</span></li>
+            <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>鸣潮等各种游戏功能一直开放，其他功能可咨询作者 <code class="command px-2 py-1 rounded-lg">fb作者</code></span></li>
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>需要启用寻找反馈群群主</span></li>
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>恶意行为(发电玩笑不算，自己把握)，被主人发现全局拉黑处理</span></li>
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>如因库洛操作导致机器人无法使用，我也没办法鸭</span></li>
@@ -239,7 +313,7 @@
           <div class="grid lg:grid-cols-[.9fr_1.1fr] gap-8 items-center">
             <div>
               <p class="text-tide font-bold mb-3 tracking-[.25em] text-sm">NOT ONLY WUTHERING WAVES</p>
-              <h2 class="text-3xl md:text-5xl font-black leading-tight">不只是鸣潮，菲比是一整套群聊游戏与娱乐服务。</h2>
+              <h2 class="text-3xl md:text-5xl font-black leading-tight">菲比不止鸣潮 —— 一站式群聊游戏与娱乐服务平台</h2>
               <p class="mt-5 text-slate-600 leading-relaxed">菲比基于 GS Core 与 AstrBot 生态，覆盖多款二游查询、签到、评分、角色面板、资料服务，也提供链接解析、表情包、AI 聊天、群管和群日常分析等实用能力。你可以把它理解成一个“游戏资料站 + 群聊工具箱”。</p>
               <div class="mt-6 grid grid-cols-3 gap-3 text-center">
                 <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-tide">7+</p><p class="text-xs text-slate-500">游戏方向</p></div>
@@ -305,7 +379,7 @@
               </div>
             </div>
           </div></div></div>
-          <div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black text-luna flex items-center gap-3"><i class="fa fa-robot"></i>其他Bot指令</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-amber-100"><div class="py-10 text-center text-slate-500 text-lg">暂无</div></div></div></div>
+          <div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black text-luna flex items-center gap-3"><i class="fa fa-robot"></i>其他Bot指令</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-amber-100"><div class="p-5"><div class="flex items-center justify-between gap-3"><code class="command px-3 py-2 rounded-xl">fb功能</code><button class="copy-btn px-3 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-700 text-sm" data-command="fb功能"><i class="fa fa-copy mr-1"></i>复制</button></div></div></div></div></div>
           <div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black text-gold flex items-center gap-3"><i class="fa fa-cogs"></i>菲比框架特性</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-amber-100">
             <div class="grid md:grid-cols-2 gap-6">
               <div><h4 class="font-bold text-gold mb-3">核心特性：</h4><ul class="space-y-2 text-slate-600"><li>--------------------------------------</li><li>菲比Bot承诺拥有的免费鸣潮机器人</li><li>如果需要 <code class="command px-2 py-1 rounded-lg">娱乐功能</code> 如：视频解析、表情包等</li><li>请先通过用户审核后，进群邀请 <code class="command px-2 py-1 rounded-lg">凌阳娱乐</code></li><li>目前二游游戏功能与娱乐功能是分离的，也不会合并。</li><li>--------------------------------------</li></ul></div>
@@ -350,6 +424,37 @@
       document.querySelectorAll('.collapsible').forEach(btn => btn.addEventListener('click', () => { btn.classList.toggle('active'); const p=btn.nextElementSibling; p.style.maxHeight = p.style.maxHeight ? null : p.scrollHeight + 'px'; }));
       const io = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); }), {threshold:.12});
       document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+    });
+    // 开场动画 1.5秒后消失
+    setTimeout(() => document.getElementById('splash')?.classList.add('hidden'), 1500);
+    // 星掉落
+    function createStar() {
+      const star = document.createElement('div');
+      star.className = 'star-fall';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+      const colors = ['rgba(255,193,7,.6)', 'rgba(79,195,247,.5)', 'rgba(255,138,128,.5)', 'rgba(255,179,0,.4)'];
+      star.style.background = colors[Math.floor(Math.random() * colors.length)];
+      star.style.boxShadow = '0 0 4px ' + star.style.background;
+      document.body.appendChild(star);
+      star.addEventListener('animationend', () => star.remove());
+    }
+    setInterval(createStar, 400);
+    // 鼠标拖尾
+    const trailColors = ['#FFC107', '#4FC3F7', '#FF8A80', '#FFB300'];
+    let trailIdx = 0, lastT = 0;
+    document.addEventListener('mousemove', (e) => {
+      if (Date.now() - lastT < 35) return;
+      lastT = Date.now();
+      const t = document.createElement('div');
+      t.className = 'cursor-trail';
+      t.style.left = e.clientX - 4 + 'px';
+      t.style.top = e.clientY - 4 + 'px';
+      t.style.background = trailColors[trailIdx++ % trailColors.length];
+      t.style.boxShadow = '0 0 6px ' + t.style.background;
+      document.body.appendChild(t);
+      t.addEventListener('animationend', () => t.remove());
     });
   </script>
 
