@@ -31,10 +31,13 @@
     html { scroll-behavior: smooth; }
     body {
       background:
-        radial-gradient(circle at 16% 8%, rgba(101,255,240,.18), transparent 30%),
-        radial-gradient(circle at 78% 0%, rgba(184,156,255,.22), transparent 34%),
-        radial-gradient(circle at 52% 88%, rgba(255,217,138,.10), transparent 34%),
-        linear-gradient(135deg, #070914 0%, #111834 52%, #090d1a 100%);
+        radial-gradient(circle at 16% 8%, rgba(101,255,240,.22), transparent 32%),
+        radial-gradient(circle at 78% 0%, rgba(184,156,255,.26), transparent 36%),
+        radial-gradient(circle at 52% 88%, rgba(255,217,138,.12), transparent 36%),
+        radial-gradient(circle at 50% 50%, rgba(101,255,240,.05), transparent 60%),
+        url('assets/waves-group.png') center/cover no-repeat fixed,
+        linear-gradient(135deg, #050810 0%, #0d1530 52%, #070a16 100%);
+      background-blend-mode: normal, normal, normal, normal, overlay, normal;
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -161,7 +164,7 @@
       <a href="#top" class="flex items-center gap-3">
         <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-tide via-luna to-gold p-[1px] shadow-glow">
           <div class="w-full h-full rounded-2xl bg-abyss flex items-center justify-center">
-            <i class="fa fa-star text-gold text-xl wave-ring"></i>
+            <img src="assets/phoebe-avatar.png" alt="菲比" class="w-full h-full rounded-2xl object-cover">
           </div>
         </div>
         <div>
@@ -215,6 +218,7 @@
                 </div>
                 <h3 class="text-4xl font-black tracking-widest">PHOEBE</h3>
                 <p class="text-tide mt-2 tracking-[.4em] text-xs">WUTHERING WAVES BOT</p>
+                <img src="assets/phoebe-fullbody.png" alt="菲比立绘" class="mt-4 w-40 h-auto mx-auto opacity-90 drop-shadow-[0_0_15px_rgba(101,255,240,.4)]">
                 <div class="mt-8 grid grid-cols-3 gap-3 w-full">
                   <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-tide">免费</p><p class="text-xs text-slate-400">公益运行</p></div>
                   <div class="glass rounded-2xl p-4"><p class="text-2xl font-black text-luna">fb</p><p class="text-xs text-slate-400">触发前缀</p></div>
@@ -314,7 +318,7 @@
               </div>
             </div>
             <div class="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-glow">
-              <img src="assets/banner-gpt.png" alt="鸣潮功能视觉图" class="w-full h-full object-cover">
+              <img src="assets/waves-group.png" alt="鸣潮角色合照" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-abyss/75 via-transparent to-transparent"></div>
               <div class="absolute bottom-5 left-5 right-5">
                 <p class="text-sm text-tide">核心方向</p>
