@@ -4,16 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="菲比Bot｜鸣潮免费分享机器人，公益运行，支持鸣潮、原神、崩铁、绝区零、三角洲、BA、二重螺旋与 AstrBot 娱乐工具。" />
+  <meta name="keywords" content="菲比Bot,鸣潮机器人,QQ机器人,原神,崩坏星穹铁道,绝区零,三角洲,碧蓝档案,二重螺旋,异环,洛克王国,免费Bot,公益机器人,游戏查询,签到,声骸评分" />
+  <meta name="author" content="伐竹猫Andy" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="菲比 Bot｜鸣潮机器人官方平台" />
+  <meta property="og:description" content="菲比Bot是面向鸣潮玩家的免费机器人平台，集成账号、查询、签到、评分与多游戏服务，公益运行。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.fb520.site" />
+  <meta property="og:image" content="https://www.fb520.site/assets/phoebe-avatar.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="菲比 Bot｜鸣潮机器人官方平台" />
+  <meta name="twitter:description" content="菲比Bot是面向鸣潮玩家的免费机器人平台，公益运行，支持多款游戏查询服务。" />
   <link rel="icon" type="image/jpeg" href="assets/phoebe-avatar.jpg">
   <title>菲比 Bot｜鸣潮机器人官方平台</title>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fonts: using system font stack for fast loading in China -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
         fontFamily: {
-          sans: ['Quicksand', 'PingFang SC', 'Microsoft YaHei UI', 'sans-serif'],
+          sans: ['-apple-system', 'BlinkMacSystemFont', 'PingFang SC', 'Microsoft YaHei UI', 'Segoe UI', 'Helvetica Neue', 'sans-serif'],
         },
         extend: {
           colors: {
@@ -93,6 +104,30 @@
       opacity: 0.25;
       z-index: 0;
       pointer-events: none;
+    }
+
+    .hero-carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      border-radius: 1.8rem;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(69, 90, 100, .18);
+      background: linear-gradient(135deg, #fff8e1, #e0f7fa);
+    }
+    .hero-carousel img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.018);
+      transition: opacity 1.2s ease, transform 8s ease;
+    }
+    .hero-carousel img.active {
+      opacity: 1;
+      transform: scale(1);
     }
 
 
@@ -180,6 +215,111 @@
       filter: blur(30px) brightness(1.1);
       opacity: 0.15;
     }
+
+    /* === Help Overlay (fullscreen popup on hover) === */
+    .help-card {
+      position: relative;
+    }
+    .help-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99990;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s ease, visibility 0.15s ease;
+      pointer-events: none;
+      padding: 40px;
+    }
+    .help-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .help-overlay-content {
+      max-width: 800px;
+      max-height: 90vh;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+      background: white;
+      transform: scale(0.85) translateY(20px);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .help-overlay.active .help-overlay-content {
+      transform: scale(1) translateY(0);
+    }
+    .help-overlay-header {
+      padding: 14px 20px;
+      background: linear-gradient(135deg, rgba(79,195,247,0.15), rgba(255,193,7,0.1));
+      border-bottom: 1px solid rgba(79,195,247,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .help-overlay-header h4 {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .help-overlay-header .close-hint {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+    .help-overlay-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .help-overlay-body::-webkit-scrollbar {
+      width: 6px;
+    }
+    .help-overlay-body::-webkit-scrollbar-thumb {
+      background: rgba(79,195,247,0.4);
+      border-radius: 3px;
+    }
+    .help-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform-origin: top center;
+      transition: transform 0.2s ease;
+    }
+
+    .help-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      color: #64748b;
+      transition: 0.15s;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .help-close-btn:hover {
+      background: #ef4444;
+      color: white;
+      transform: scale(1.1);
+    }
+
   </style>
 </head>
 <body class="text-slate-700 font-sans">
@@ -238,12 +378,63 @@
           <p class="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl">菲比 Bot 是面向鸣潮玩家的免费机器人平台，集成账号、查询、签到、评分与多游戏服务，保持公益初心，持续陪伴每一个热爱索拉里斯的群聊。</p>
           <div class="mt-8 flex flex-col sm:flex-row gap-4">
             <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-white font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 加入用户审核群</a>
-            <a href="#features" class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-2xl glass font-bold hover:border-tide/40 transition"><i class="fa fa-magic"></i> 查看功能</a>
+            <a href="#overview" class="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-2xl glass font-bold hover:border-tide/40 transition"><i class="fa fa-magic"></i> 查看功能</a>
           </div>
         </div>
         <div class="fade-in relative">
           <div class="relative glass-strong rounded-[2.2rem] p-6 md:p-8 overflow-hidden">
-            <img src="assets/phoebe-fullbody.jpg" alt="鸣潮菲比" class="w-full rounded-[1.8rem] object-cover shadow-lg">
+            <div class="hero-carousel" aria-label="菲比轮播图">
+              <img src="assets/hero-carousel/phoebe-hero-01.jpg" alt="鸣潮菲比轮播图 1" class="active" loading="eager">
+              <img src="assets/hero-carousel/phoebe-hero-02.jpg" alt="鸣潮菲比轮播图 2" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-03.jpg" alt="鸣潮菲比轮播图 3" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-04.jpg" alt="鸣潮菲比轮播图 4" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-05.jpg" alt="鸣潮菲比轮播图 5" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-06.jpg" alt="鸣潮菲比轮播图 6" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-07.jpg" alt="鸣潮菲比轮播图 7" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-08.jpg" alt="鸣潮菲比轮播图 8" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-09.jpg" alt="鸣潮菲比轮播图 9" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-10.jpg" alt="鸣潮菲比轮播图 10" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-11.jpg" alt="鸣潮菲比轮播图 11" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-12.jpg" alt="鸣潮菲比轮播图 12" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-13.jpg" alt="鸣潮菲比轮播图 13" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-14.jpg" alt="鸣潮菲比轮播图 14" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-15.jpg" alt="鸣潮菲比轮播图 15" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-16.jpg" alt="鸣潮菲比轮播图 16" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-17.jpg" alt="鸣潮菲比轮播图 17" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-18.jpg" alt="鸣潮菲比轮播图 18" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-19.jpg" alt="鸣潮菲比轮播图 19" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-20.jpg" alt="鸣潮菲比轮播图 20" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-21.jpg" alt="鸣潮菲比轮播图 21" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-22.jpg" alt="鸣潮菲比轮播图 22" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-23.jpg" alt="鸣潮菲比轮播图 23" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-24.jpg" alt="鸣潮菲比轮播图 24" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-25.jpg" alt="鸣潮菲比轮播图 25" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-26.jpg" alt="鸣潮菲比轮播图 26" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-27.jpg" alt="鸣潮菲比轮播图 27" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-28.jpg" alt="鸣潮菲比轮播图 28" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-29.jpg" alt="鸣潮菲比轮播图 29" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-30.jpg" alt="鸣潮菲比轮播图 30" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-31.jpg" alt="鸣潮菲比轮播图 31" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-32.jpg" alt="鸣潮菲比轮播图 32" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-33.jpg" alt="鸣潮菲比轮播图 33" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-34.jpg" alt="鸣潮菲比轮播图 34" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-35.jpg" alt="鸣潮菲比轮播图 35" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-36.jpg" alt="鸣潮菲比轮播图 36" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-37.jpg" alt="鸣潮菲比轮播图 37" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-38.jpg" alt="鸣潮菲比轮播图 38" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-39.jpg" alt="鸣潮菲比轮播图 39" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-40.jpg" alt="鸣潮菲比轮播图 40" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-41.jpg" alt="鸣潮菲比轮播图 41" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-42.jpg" alt="鸣潮菲比轮播图 42" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-43.jpg" alt="鸣潮菲比轮播图 43" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-44.jpg" alt="鸣潮菲比轮播图 44" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-45.jpg" alt="鸣潮菲比轮播图 45" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-46.jpg" alt="鸣潮菲比轮播图 46" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-47.jpg" alt="鸣潮菲比轮播图 47" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-48.jpg" alt="鸣潮菲比轮播图 48" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-49.jpg" alt="鸣潮菲比轮播图 49" class="" loading="lazy">
+              <img src="assets/hero-carousel/phoebe-hero-50.jpg" alt="鸣潮菲比轮播图 50" class="" loading="lazy">
+            </div>
             <div class="text-center mt-6">
               <h3 class="text-4xl font-black tracking-widest text-slate-800">菲比</h3>
               <p class="text-amber-500 mt-2 tracking-[.4em] text-xs font-bold">鸣潮BOT</p>
@@ -260,7 +451,7 @@
 
     <div class="max-w-7xl mx-auto px-4 space-y-14 pb-20">
       <section id="news" class="fade-in">
-        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-bullhorn"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">最新公告</h2></div>
+        <div class="flex items-center gap-3 mb-6"><img src="assets/phoebe-title-notice.png" alt="菲比Q版图标" class="w-11 h-11 object-contain drop-shadow-sm shrink-0"><h2 class="text-2xl md:text-3xl font-black text-slate-800">最新公告</h2></div>
         <div class="glass-strong rounded-3xl p-6 md:p-8">
           <ul class="grid gap-4 text-slate-700">
             <li class="flex gap-3"><i class="fa fa-check-circle text-tide mt-1"></i><span>菲比Bot是免费Bot，从不会收取任何费用</span></li>
@@ -282,7 +473,7 @@
       </section>
 
       <section id="login" class="fade-in">
-        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-lock"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">登录说明</h2></div>
+        <div class="flex items-center gap-3 mb-6"><img src="assets/phoebe-title-login.png" alt="菲比Q版图标" class="w-11 h-11 object-contain drop-shadow-sm shrink-0"><h2 class="text-2xl md:text-3xl font-black text-slate-800">登录说明</h2></div>
         <div class="glass rounded-3xl p-6 md:p-8">
           <p class="text-slate-600 mb-5">当前策略使用库街区app登录，如果希望同时登录则只能在库街区登录后手动抓包</p>
           <div class="rounded-2xl border border-tide/25 bg-tide/10 p-5 text-slate-700">
@@ -293,7 +484,7 @@
       </section>
 
       <section id="add" class="fade-in">
-        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-link"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">添加方式 & 群聊要求</h2></div>
+        <div class="flex items-center gap-3 mb-6"><img src="assets/phoebe-title-join.png" alt="菲比Q版图标" class="w-11 h-11 object-contain drop-shadow-sm shrink-0"><h2 class="text-2xl md:text-3xl font-black text-slate-800">添加方式 & 群聊要求</h2></div>
         <div class="grid md:grid-cols-2 gap-6">
           <div class="glass rounded-3xl p-6 md:p-8">
             <h3 class="text-2xl font-black text-luna mb-5">添加方式</h3>
@@ -316,7 +507,7 @@
       </section>
 
       <section id="rules" class="fade-in">
-        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-exclamation-triangle"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">服务条例</h2></div>
+        <div class="flex items-center gap-3 mb-6"><img src="assets/phoebe-title-rules.png" alt="菲比Q版图标" class="w-11 h-11 object-contain drop-shadow-sm shrink-0"><h2 class="text-2xl md:text-3xl font-black text-slate-800">服务条例</h2></div>
         <div class="glass rounded-3xl p-6 md:p-8">
           <ul class="space-y-3 text-slate-600">
             <li class="flex gap-3"><i class="fa fa-times-circle text-red-300 mt-1"></i><span>踢出群聊后拉黑群</span></li>
@@ -331,7 +522,7 @@
 
 
       <section id="overview" class="fade-in">
-        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-th-large"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">菲比功能全览</h2></div>
+        <div class="flex items-center gap-3 mb-6"><img src="assets/phoebe-title-overview.png" alt="菲比Q版图标" class="w-11 h-11 object-contain drop-shadow-sm shrink-0"><h2 class="text-2xl md:text-3xl font-black text-slate-800">菲比功能全览</h2></div>
         <div class="glass-strong rounded-3xl p-6 md:p-8 mb-6">
           <div class="grid lg:grid-cols-[.9fr_1.1fr] gap-8 items-center">
             <div>
@@ -355,17 +546,87 @@
         </div>
 
         <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/waves-group.jpg" class="w-full h-32 object-cover" alt="鸣潮"><div class="p-5"><h3 class="text-xl font-black text-tide">鸣潮服务</h3><p class="text-slate-600 text-sm mt-2">WutheringWavesUID、角色面板、库街区登录、自动签到、声骸评分、资料查询。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">fb功能</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/genshin-group.jpg" class="w-full h-32 object-cover" alt="原神"><div class="p-5"><h3 class="text-xl font-black text-gold">原神服务</h3><p class="text-slate-600 text-sm mt-2">GenshinUID 系列查询能力，支持角色、账号资料、养成与游戏数据相关功能。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">ys帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/starrail-group.jpg" class="w-full h-32 object-cover" alt="崩铁"><div class="p-5"><h3 class="text-xl font-black text-blue-200">崩坏：星穹铁道</h3><p class="text-slate-600 text-sm mt-2">星铁相关账号、角色与资料查询能力，适合群内快速查看养成信息。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">xt帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/zzz-group.jpg" class="w-full h-32 object-cover" alt="绝区零"><div class="p-5"><h3 class="text-xl font-black text-yellow-200">绝区零服务</h3><p class="text-slate-600 text-sm mt-2">ZZZeroUID 支持绝区零相关查询、角色资料和游戏信息服务。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">z3帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/delta-group.jpg" class="w-full h-32 object-cover" alt="三角洲"><div class="p-5"><h3 class="text-xl font-black text-green-200">三角洲行动</h3><p class="text-slate-600 text-sm mt-2">三角洲方向的游戏资料与群内辅助查询能力，服务更多玩家圈子。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">delta帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/ba-group.jpg" class="w-full h-32 object-cover" alt="碧蓝档案"><div class="p-5"><h3 class="text-xl font-black text-sky-200">BA / 蔚蓝档案</h3><p class="text-slate-600 text-sm mt-2">BA 方向资料查询与群聊辅助能力，让群内二游玩家不止一种选择。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">ba帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/dna-group.jpg" class="w-full h-32 object-cover" alt="二重螺旋"><div class="p-5"><h3 class="text-xl font-black text-pink-200">二重螺旋</h3><p class="text-slate-600 text-sm mt-2">DNAUID 相关能力，覆盖二重螺旋资料、查询与未来扩展功能。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">dna帮助</code></p></div></div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('waves')" style="cursor:pointer;">
+            <img src="assets/waves-group.jpg" class="w-full h-32 object-cover" alt="鸣潮">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-tide">鸣潮服务</h3>
+              <p class="text-slate-600 text-sm mt-2">WutheringWavesUID、角色面板、库街区登录、自动签到、声骸评分、资料查询。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">fb功能</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('genshin')" style="cursor:pointer;">
+            <img src="assets/genshin-group.jpg" class="w-full h-32 object-cover" alt="原神">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-gold">原神服务</h3>
+              <p class="text-slate-600 text-sm mt-2">GenshinUID 系列查询能力，支持角色、账号资料、养成与游戏数据相关功能。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">ys帮助</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('starrail')" style="cursor:pointer;">
+            <img src="assets/starrail-group.jpg" class="w-full h-32 object-cover" alt="崩铁">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-blue-200">崩坏：星穹铁道</h3>
+              <p class="text-slate-600 text-sm mt-2">星铁相关账号、角色与资料查询能力，适合群内快速查看养成信息。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">xt帮助</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('zzz')" style="cursor:pointer;">
+            <img src="assets/zzz-group.jpg" class="w-full h-32 object-cover" alt="绝区零">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-yellow-200">绝区零服务</h3>
+              <p class="text-slate-600 text-sm mt-2">ZZZeroUID 支持绝区零相关查询、角色资料和游戏信息服务。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">z3帮助</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('delta')" style="cursor:pointer;">
+            <img src="assets/delta-group.jpg" class="w-full h-32 object-cover" alt="三角洲">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-green-200">三角洲行动</h3>
+              <p class="text-slate-600 text-sm mt-2">三角洲方向的游戏资料与群内辅助查询能力，服务更多玩家圈子。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">delta帮助</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('ba')" style="cursor:pointer;">
+            <img src="assets/ba-group.jpg" class="w-full h-32 object-cover" alt="碧蓝档案">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-sky-200">BA / 蔚蓝档案</h3>
+              <p class="text-slate-600 text-sm mt-2">BA 方向资料查询与群聊辅助能力，让群内二游玩家不止一种选择。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">ba帮助</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('dna')" style="cursor:pointer;">
+            <img src="assets/dna-group.jpg" class="w-full h-32 object-cover" alt="二重螺旋">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-pink-200">二重螺旋</h3>
+              <p class="text-slate-600 text-sm mt-2">DNAUID 相关能力，覆盖二重螺旋资料、查询与未来扩展功能。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">dna帮助</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
           <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/astrbot-group.jpg" class="w-full h-32 object-cover" alt="AstrBot"><div class="p-5"><h3 class="text-xl font-black text-luna">AstrBot 娱乐工具</h3><p class="text-slate-600 text-sm mt-2">AI 聊天、链接解析、表情包、群管、群日常分析、随机图、一言、今天吃什么等。</p><p class="mt-3 text-xs text-slate-500">娱乐功能与游戏功能分离运行</p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/yihuan-group.jpg" class="w-full h-32 object-cover" alt="异环"><div class="p-5"><h3 class="text-xl font-black text-violet-500">异环</h3><p class="text-slate-600 text-sm mt-2">异环方向资料、角色与未来扩展服务，保持与菲比多游戏生态同步。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">yh帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/luoke-group.jpg" class="w-full h-32 object-cover" alt="洛克王国世界"><div class="p-5"><h3 class="text-xl font-black text-emerald-500">洛克王国·世界</h3><p class="text-slate-600 text-sm mt-2">洛克王国·世界相关资料与查询扩展，适合轻松可爱的群聊使用场景。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">lk帮助</code></p></div></div>
-          <div class="glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative"><img src="assets/deer-fortune.jpg" class="w-full h-32 object-cover" alt="今日运势和鹿"><div class="p-5"><h3 class="text-xl font-black text-amber-500">今日运势 & 🦌/鹿</h3><p class="text-slate-600 text-sm mt-2">每日小运势、盲盒趣味和鹿鹿互动，让群聊多一点轻松和可爱。</p><p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">今日运势</code> <code class="command px-2 py-1 rounded">🦌</code></p></div></div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('yihuan')" style="cursor:pointer;">
+            <img src="assets/yihuan-group-v3.jpg" class="w-full h-32 object-cover" alt="异环">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-violet-500">异环</h3>
+              <p class="text-slate-600 text-sm mt-2">异环方向资料、角色与未来扩展服务，保持与菲比多游戏生态同步。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">yh帮助</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('luoke')" style="cursor:pointer;">
+            <img src="assets/luoke-group-v2.png" class="w-full h-32 object-cover" alt="洛克王国世界">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-emerald-500">洛克王国·世界</h3>
+              <p class="text-slate-600 text-sm mt-2">洛克王国·世界相关资料与查询扩展，适合轻松可爱的群聊使用场景。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">lk帮助</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
+          <div class="help-card glass rounded-3xl overflow-hidden group hover:-translate-y-1 transition relative" onclick="showHelp('fortune')" style="cursor:pointer;">
+            <img src="assets/deer-fortune.jpg" class="w-full h-32 object-cover" alt="今日运势和鹿">
+            <div class="p-5">
+              <h3 class="text-xl font-black text-amber-500">今日运势 & 🦌/鹿</h3>
+              <p class="text-slate-600 text-sm mt-2">每日小运势、盲盒趣味和鹿鹿互动，让群聊多一点轻松和可爱。</p>
+              <p class="mt-3 text-xs text-slate-500">常用：<code class="command px-2 py-1 rounded">今日运势</code> <code class="command px-2 py-1 rounded">🦌</code> · <span class="text-tide">点击查看帮助 ↗</span></p>
+            </div>
+          </div>
         </div>
 
         <div class="mt-6 glass rounded-3xl p-6 md:p-8">
@@ -378,7 +639,7 @@
       </section>
 
       <section id="features" class="fade-in">
-        <div class="flex items-center gap-3 mb-6"><div class="w-11 h-11 rounded-2xl glass flex items-center justify-center text-tide"><i class="fa fa-magic"></i></div><h2 class="text-2xl md:text-3xl font-black text-slate-800">功能介绍</h2></div>
+        <div class="flex items-center gap-3 mb-6"><img src="assets/phoebe-title-features.png" alt="菲比Q版图标" class="w-11 h-11 object-contain drop-shadow-sm shrink-0"><h2 class="text-2xl md:text-3xl font-black text-slate-800">功能介绍</h2></div>
         <div class="space-y-5">
           <div class="rounded-3xl overflow-hidden glass"><button class="collapsible w-full p-5 flex items-center justify-between text-left"><span class="text-xl font-black text-tide flex items-center gap-3"><i class="fa fa-gamepad"></i>基本功能</span><i class="fa fa-chevron-down chev transition-transform text-slate-500"></i></button><div class="panel"><div class="p-6 border-t border-amber-100">
             <p class="text-slate-600 mb-5">触发前缀为 <code class="command px-2 py-1 rounded-lg">fb</code></p>
@@ -420,23 +681,53 @@
 
     <!-- 角色装饰 -->
     <div class="relative max-w-7xl mx-auto px-4 mb-10">
-      <div class="glass-strong rounded-3xl p-8 overflow-hidden relative">
-        <img src="assets/character-gpt.png" alt="鸣潮角色" class="absolute right-0 top-0 h-full opacity-30 object-cover object-left rounded-r-3xl" style="max-width:40%;">
-        <div class="relative z-10">
-          <h2 class="text-3xl font-black mb-3">加入菲比大家庭</h2>
-          <p class="text-slate-600 max-w-lg">与数千名鸣潮玩家一起，享受免费、稳定、持续更新的机器人服务。菲比陪你探索索拉里斯的每一个角落。</p>
-          <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="mt-5 inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-white font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 立即加群</a>
-        </div>
+      
+
+
+  <section class="relative z-10 max-w-7xl mx-auto px-4 py-12 fade-in">
+    <div class="glass-strong rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1 text-center md:text-left">
+        <h2 class="text-3xl md:text-4xl font-black text-slate-800 mb-4">欢迎加入菲比大家庭 🎉</h2>
+        <p class="text-lg text-slate-600 leading-relaxed mb-6">菲比 Bot 是一个温暖的公益社区，无论你是鸣潮玩家、原神旅行者还是其他游戏爱好者，这里都有你的位置。加入我们，一起让群聊更有趣！</p>
+        <a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-white font-bold shadow-glow hover:scale-[1.02] transition"><i class="fa fa-qq"></i> 加入用户审核群</a>
+      </div>
+      <div class="flex-shrink-0">
+        <img src="assets/phoebe-chibi.png" alt="菲比Q版" class="w-48 md:w-64 drop-shadow-lg">
       </div>
     </div>
-  <footer class="relative z-10 border-t border-white/10 bg-abyss/70 py-10">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-6 items-center">
-      <div class="flex items-center gap-3"><img src="assets/phoebe-avatar.jpg" alt="菲比" class="w-8 h-8 rounded-full"><h3 class="text-xl font-black">菲比 Bot 鸣潮机器人</h3></div>
-      <div class="flex gap-5 text-slate-600"><i class="fa fa-qq text-xl"></i><i class="fa fa-github text-xl"></i><i class="fa fa-envelope text-xl"></i></div>
+  </section>
+
+  <section class="relative z-10 max-w-7xl mx-auto px-4 py-8 fade-in">
+    <div class="glass rounded-3xl p-8 text-center">
+      <h2 class="text-2xl font-black text-slate-800 mb-3">🧋 投喂作者</h2>
+      <p class="text-slate-600 mb-5">菲比 Bot 完全免费公益运行，如果觉得好用，可以请作者喝杯奶茶~</p>
+      <a href="https://zz.fb520.site" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-400 to-rose-400 text-white font-bold shadow-glow hover:scale-[1.02] transition">请作者喝奶茶</a>
     </div>
-    <div class="max-w-7xl mx-auto px-4 mt-6 pt-6 border-t border-white/10 text-center text-slate-500 text-sm">
-      <p>© 2025 菲比 Bot 保留所有权利 | 免费开源机器人，仅用于交流学习</p>
-      <p class="mt-2">如有问题请联系机器人主人，禁止用于商业用途</p>
+  </section>
+
+
+<footer class="relative z-10 mt-16 border-t border-amber-100/50">
+    <div class="max-w-7xl mx-auto px-4 py-10">
+      <div class="grid md:grid-cols-3 gap-8 text-sm text-slate-600">
+        <div>
+          <h4 class="font-bold text-slate-800 mb-3">菲比 Bot</h4>
+          <p>面向鸣潮玩家的免费机器人平台，公益运行，持续陪伴每一个热爱索拉里斯的群聊。</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 mb-3">联系方式</h4>
+          <p>作者：伐竹猫Andy</p>
+          <p>QQ：2408736708</p>
+          <p>用户审核群：<a href="https://qm.qq.com/q/7L04wEX08E" target="_blank" class="text-tide hover:underline">点击加入</a></p>
+        </div>
+        <div>
+          <h4 class="font-bold text-slate-800 mb-3">相关链接</h4>
+          <p><a href="https://mbt.fb520.site/waves/panel-edit/#/dashboard" target="_blank" class="text-tide hover:underline">背景图编辑台</a></p>
+          <p><a href="#overview" class="text-tide hover:underline">功能全览</a></p>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-amber-100/30 text-center text-xs text-slate-500">
+        <p>© 2024-2026 伐竹猫Andy. All rights reserved. 菲比Bot为公益项目，不收取任何费用。</p>
+      </div>
     </div>
   </footer>
 
@@ -484,6 +775,163 @@
     });
   </script>
 
+
+
+  <!-- Help Overlays -->
+  <div id="help-overlay-fortune" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative; max-width:1000px;">
+      <button class="help-close-btn" onclick="closeHelp('fortune')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-amber-500"></i> 今日运势 & 🦌/鹿 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body" style="display:flex; gap:12px; padding:12px;">
+        <img class="help-img" src="assets/help-fortune.jpg" alt="今日运势帮助" style="width:50%; height:auto; border-radius:12px;">
+        <img class="help-img" src="assets/help-deer.jpg" alt="鹿帮助" style="width:50%; height:auto; border-radius:12px;">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-ba" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('ba')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-sky-400"></i> BA / 蔚蓝档案 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-ba.jpg" alt="碧蓝档案帮助">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-dna" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('dna')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-pink-400"></i> 二重螺旋 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-dna.jpg" alt="二重螺旋帮助">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-yihuan" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('yihuan')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-violet-500"></i> 异环 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-yihuan.jpg" alt="异环帮助">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-delta" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('delta')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-green-400"></i> 三角洲行动 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-delta.jpg" alt="三角洲帮助">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-luoke" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('luoke')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-emerald-500"></i> 洛克王国·世界 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-luoke.jpg" alt="洛克王国帮助">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-zzz" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('zzz')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-yellow-400"></i> 绝区零服务 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-zzz.jpg" alt="绝区零帮助">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-starrail" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('starrail')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-blue-400"></i> 崩坏：星穹铁道 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-starrail.jpg" alt="崩铁帮助">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-genshin" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('genshin')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-gold"></i> 原神服务 · 帮助面板</h4>
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-genshin.jpg" alt="原神帮助">
+      </div>
+    </div>
+  </div>
+
+  <div id="help-overlay-waves" class="help-overlay">
+    <div class="help-overlay-content" style="position:relative;">
+      <button class="help-close-btn" onclick="closeHelp('waves')" title="关闭">✕</button>
+      <div class="help-overlay-header">
+        <h4><i class="fa fa-book text-tide"></i> 鸣潮服务 · 帮助面板</h4>
+        
+      </div>
+      <div class="help-overlay-body">
+        <img class="help-img" src="assets/help-waves.jpg" alt="鸣潮帮助">
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showHelp(id) {
+      document.getElementById('help-overlay-' + id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeHelp(id) {
+      document.getElementById('help-overlay-' + id).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close on clicking the overlay background (not the content)
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('help-overlay') && e.target.classList.contains('active')) {
+        const id = e.target.id.replace('help-overlay-', '');
+        closeHelp(id);
+      }
+    });
+  </script>
+
+    // Hero image carousel: rotate every 30 seconds
+    (function () {
+      const slides = document.querySelectorAll('.hero-carousel img');
+      if (!slides.length) return;
+      let idx = 0;
+      setInterval(() => {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+      }, 30000);
+    })();
 
 </body>
 </html>
