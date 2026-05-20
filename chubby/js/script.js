@@ -31,7 +31,37 @@ let CACHES = {
     gifs: [
         "img/phoebe_0.png",
         "img/phoebe_1.png",
-        "img/phoebe_2.png"
+        "img/phoebe_2.png",
+        "img/phoebe_ai_03.png",
+        "img/phoebe_ai_04.png",
+        "img/phoebe_ai_05.png",
+        "img/phoebe_ai_06.png",
+        "img/phoebe_ai_07.png",
+        "img/phoebe_ai_08.png",
+        "img/phoebe_ai_09.png",
+        "img/phoebe_ai_10.png",
+        "img/phoebe_ai_11.png",
+        "img/phoebe_ai_12.png",
+        "img/phoebe_ai_13.png",
+        "img/phoebe_ai_14.png",
+        "img/phoebe_ai_15.png",
+        "img/phoebe_ai_16.png",
+        "img/phoebe_ai_17.png",
+        "img/phoebe_ai_18.png",
+        "img/phoebe_ai_19.png",
+        "img/phoebe_ai_20.png",
+        "img/phoebe_ai_21.png",
+        "img/phoebe_ai_22.png",
+        "img/phoebe_ai_23.png",
+        "img/phoebe_ai_24.png",
+        "img/phoebe_ai_25.png",
+        "img/phoebe_ai_26.png",
+        "img/phoebe_ai_27.png",
+        "img/phoebe_ai_28.png",
+        "img/phoebe_ai_29.png",
+        "img/phoebe_ai_30.png",
+        "img/phoebe_ai_31.png",
+        "img/phoebe_ai_32.png"
     ]
 };
 
