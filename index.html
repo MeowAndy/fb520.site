@@ -129,6 +129,51 @@
       opacity: 1;
       transform: scale(1);
     }
+    .hero-carousel-controls {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 14px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .hero-carousel-btn {
+      pointer-events: auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: rgba(26, 35, 50, .48);
+      border: 1px solid rgba(255, 255, 255, .45);
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+      backdrop-filter: blur(10px);
+      transition: transform .18s ease, background .18s ease;
+    }
+    .hero-carousel-btn:hover { transform: translateY(-1px) scale(1.04); background: rgba(26, 35, 50, .66); }
+    .hero-carousel-meta {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      background: rgba(26, 35, 50, .48);
+      border: 1px solid rgba(255,255,255,.42);
+      box-shadow: 0 8px 24px rgba(0,0,0,.16);
+      backdrop-filter: blur(10px);
+    }
+    .hero-carousel-random { font-size: 12px; padding: 0 13px; width: auto; }
 
 
     /* === 开场动画 === */
@@ -353,6 +398,7 @@
         <a class="nav-link hover:text-tide" href="#news">最新公告</a>
         <a class="nav-link hover:text-tide" href="#overview">功能全览</a>
         <a class="nav-link hover:text-tide" href="#features">功能介绍</a>
+        <a class="nav-link hover:text-tide" href="#chubby">菲比啾比</a>
         <a class="nav-link hover:text-tide" href="#add">添加方式</a>
         <a class="nav-link hover:text-tide" href="#rules">服务条例</a>
       </nav>
@@ -360,7 +406,7 @@
     </div>
     <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-white/95">
       <div class="px-4 py-4 grid gap-3 text-slate-600">
-        <a href="#news">最新公告</a><a href="#overview">功能全览</a><a href="#features">功能介绍</a><a href="#add">添加方式</a><a href="#rules">服务条例</a>
+        <a href="#news">最新公告</a><a href="#overview">功能全览</a><a href="#features">功能介绍</a><a href="#chubby">菲比啾比</a><a href="#add">添加方式</a><a href="#rules">服务条例</a>
       </div>
     </div>
   </header>
@@ -434,6 +480,14 @@
               <img src="assets/hero-carousel/phoebe-hero-48.jpg" alt="鸣潮菲比轮播图 48" class="" loading="lazy">
               <img src="assets/hero-carousel/phoebe-hero-49.jpg" alt="鸣潮菲比轮播图 49" class="" loading="lazy">
               <img src="assets/hero-carousel/phoebe-hero-50.jpg" alt="鸣潮菲比轮播图 50" class="" loading="lazy">
+              <div class="hero-carousel-controls" aria-label="菲比图片轮播控制">
+                <button class="hero-carousel-btn" id="heroPrev" type="button" aria-label="上一张"><i class="fa fa-angle-left"></i></button>
+                <div class="hero-carousel-meta">
+                  <span id="heroCarouselIndex">01</span><span>/</span><span id="heroCarouselTotal">50</span>
+                  <button class="hero-carousel-btn hero-carousel-random" id="heroRandom" type="button" aria-label="随机一张"><i class="fa fa-random mr-1"></i>随机</button>
+                </div>
+                <button class="hero-carousel-btn" id="heroNext" type="button" aria-label="下一张"><i class="fa fa-angle-right"></i></button>
+              </div>
             </div>
             <div class="text-center mt-6">
               <h3 class="text-4xl font-black tracking-widest text-slate-800">菲比</h3>
@@ -471,6 +525,8 @@
           <li class="flex gap-3"><i class="fa fa-check text-gold mt-1"></i><span>具体功能发送 <code class="command px-2 py-1 rounded-lg">fb功能</code> 可查看指令列表</span></li>
         </ul>
       </section>
+
+
 
       <section id="login" class="fade-in">
         <div class="flex items-center gap-3 mb-6"><img src="assets/phoebe-title-login.png" alt="菲比Q版图标" class="w-11 h-11 object-contain drop-shadow-sm shrink-0"><h2 class="text-2xl md:text-3xl font-black text-slate-800">登录说明</h2></div>
@@ -676,6 +732,47 @@
         </div>
       </section>
     </div>
+      <section id="chubby" class="fade-in max-w-7xl mx-auto px-4 pt-2 pb-20">
+        <div class="flex items-center gap-3 mb-6">
+          <img src="chubby/img/phoebe.png" alt="菲比啾比图标" class="w-12 h-12 object-contain drop-shadow-sm shrink-0">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-black text-slate-800">菲比啾比 · 娱乐小模块</h2>
+            <p class="text-sm text-slate-500 mt-1">点一下菲比，听她「啾比」起来～</p>
+          </div>
+        </div>
+        <div class="glass-strong rounded-3xl p-6 md:p-8 overflow-hidden">
+          <div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-stretch">
+            <div class="space-y-4 flex flex-col justify-center">
+              <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-amber-600 text-sm font-bold">
+                <i class="fa fa-gamepad"></i><span>互动彩蛋</span>
+              </div>
+              <h3 class="text-3xl md:text-4xl font-black text-slate-800 leading-tight">今天也要<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-sky-400">菲比啾比~</span></h3>
+              <p class="text-slate-600 leading-relaxed">点击右侧按钮会播放菲比语音、累计本地啾比次数，并随机飘过菲比表情包。现在已经融合进官网主页，不再像网页里套网页啦。</p>
+              <div class="grid sm:grid-cols-2 gap-3 text-sm text-slate-600">
+                <a href="https://www.kurobbs.com/mc/home/9" target="_blank" class="glass rounded-2xl px-4 py-3 hover:border-tide/40 transition"><i class="fa fa-image text-amber-500 mr-2"></i>表情包来源：库街区</a>
+                <a href="https://www.bilibili.com/video/BV1EcPaz2EY7" target="_blank" class="glass rounded-2xl px-4 py-3 hover:border-tide/40 transition"><i class="fa fa-music text-sky-500 mr-2"></i>语音来源：BV1EcPaz2EY7</a>
+                <a href="https://github.com/Genius-Society/kafka_kuru" target="_blank" class="glass rounded-2xl px-4 py-3 hover:border-tide/40 transition"><i class="fa fa-code-fork text-slate-500 mr-2"></i>代码修改源：Genius-Society/kafka-kuru</a>
+                <a href="https://github.com/Genius-Society/phoebe_chubby" target="_blank" class="glass rounded-2xl px-4 py-3 hover:border-tide/40 transition"><i class="fa fa-github text-slate-800 mr-2"></i>GitHub 仓库：Genius-Society/phoebe_chubby</a>
+              </div>
+            </div>
+            <div class="relative min-h-[360px] md:min-h-[400px] rounded-3xl bg-gradient-to-br from-[#fff8e1] via-[#fff3c4] to-[#dff7ff] border border-amber-200/70 shadow-gold overflow-hidden flex items-center justify-center p-6">
+              <div class="orb w-32 h-32 bg-amber-200/50 left-8 top-10"></div>
+              <div class="orb w-28 h-28 bg-sky-200/50 right-10 bottom-10"></div>
+              <img id="chubby-float-img" src="chubby/img/phoebe.png" alt="菲比" class="absolute right-5 top-5 w-20 md:w-24 opacity-75 drop-shadow-xl pointer-events-none select-none">
+              <div class="relative z-10 text-center w-full">
+                <div class="text-slate-600 font-bold mb-3" id="chubby-counter-desc">菲比已经啾比~了</div>
+                <div id="chubby-local-counter" class="text-5xl md:text-6xl font-black text-white drop-shadow-[0_3px_12px_rgba(245,158,11,.65)]">0</div>
+                <div id="chubby-counter-unit" class="text-slate-500 font-bold mt-1 mb-8">次</div>
+                <button id="chubby-counter-button" disabled class="relative overflow-hidden inline-flex items-center justify-center px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-white text-xl font-black shadow-glow hover:scale-[1.03] active:scale-95 transition disabled:opacity-60 disabled:cursor-wait">
+                  加载中...
+                </button>
+                <p class="text-xs text-slate-400 mt-5">计数仅保存在当前浏览器本地。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
   </main>
 
 
@@ -919,18 +1016,103 @@
         closeHelp(id);
       }
     });
-    // Hero image carousel: rotate every 30 seconds
+    // Hero image carousel: random rotate every 30 seconds + manual paging
     (function () {
-      const slides = document.querySelectorAll('.hero-carousel img');
+      const slides = Array.from(document.querySelectorAll('.hero-carousel > img'));
       if (!slides.length) return;
-      let idx = 0;
-      setInterval(() => {
-        slides[idx].classList.remove('active');
-        idx = (idx + 1) % slides.length;
+      const prevBtn = document.getElementById('heroPrev');
+      const nextBtn = document.getElementById('heroNext');
+      const randomBtn = document.getElementById('heroRandom');
+      const indexEl = document.getElementById('heroCarouselIndex');
+      const totalEl = document.getElementById('heroCarouselTotal');
+      let idx = slides.findIndex(img => img.classList.contains('active'));
+      if (idx < 0) idx = 0;
+      let timer = null;
+      const pad = n => String(n).padStart(2, '0');
+      const render = (nextIdx) => {
+        if (nextIdx === idx && slides[idx].classList.contains('active')) return;
+        slides[idx]?.classList.remove('active');
+        idx = (nextIdx + slides.length) % slides.length;
         slides[idx].classList.add('active');
-      }, 30000);
+        if (indexEl) indexEl.textContent = pad(idx + 1);
+        if (totalEl) totalEl.textContent = String(slides.length);
+      };
+      const randomIndex = () => {
+        if (slides.length <= 1) return idx;
+        let next = idx;
+        while (next === idx) next = Math.floor(Math.random() * slides.length);
+        return next;
+      };
+      const restart = () => {
+        if (timer) clearInterval(timer);
+        timer = setInterval(() => render(randomIndex()), 30000);
+      };
+      const manual = (nextIdx) => { render(nextIdx); restart(); };
+      render(idx);
+      restart();
+      prevBtn?.addEventListener('click', () => manual(idx - 1));
+      nextBtn?.addEventListener('click', () => manual(idx + 1));
+      randomBtn?.addEventListener('click', () => manual(randomIndex()));
     })();
   </script>
 
+
+  <!-- native-chubby-module -->
+  <style>
+    .chubby-ripple { position:absolute; border-radius:50%; background-color:rgba(255,255,255,.42); width:100px; height:100px; margin-top:-50px; margin-left:-50px; animation: chubbyRipple 1s; opacity:0; pointer-events:none; }
+    @keyframes chubbyRipple { from { opacity:1; transform:scale(0); } to { opacity:0; transform:scale(10); } }
+    .chubby-flyer { position:fixed; width:180px; max-width:36vw; pointer-events:none; z-index:80; filter:drop-shadow(0 12px 20px rgba(0,0,0,.16)); animation: chubbyFly 2.2s linear forwards; }
+    @keyframes chubbyFly { from { transform:translateX(0) rotate(-8deg); opacity:0; } 12% { opacity:1; } to { transform:translateX(calc(100vw + 420px)) rotate(8deg); opacity:0; } }
+  </style>
+  <script>
+    (() => {
+      const audioList = [
+        'chubby/audio/phoebe_0.mp3','chubby/audio/phoebe_1.mp3','chubby/audio/phoebe_2.mp3',
+        'chubby/audio/chubby_0.mp3','chubby/audio/chubby_1.mp3','chubby/audio/chubby_2.mp3',
+        'chubby/audio/phoebe_chubby_0.mp3','chubby/audio/phoebe_chubby_1.mp3','chubby/audio/phoebe_chubby_2.mp3','chubby/audio/phoebe_chubby_3.mp3','chubby/audio/phoebe_chubby_4.mp3','chubby/audio/phoebe_chubby_5.mp3','chubby/audio/phoebe_chubby_6.mp3','chubby/audio/phoebe_chubby_7.mp3'
+      ];
+      const gifs = ['chubby/img/phoebe_0.png','chubby/img/phoebe_1.png','chubby/img/phoebe_2.png'];
+      const dynamicTexts = ['菲比已经啾比~了', '已经菲比啾比了'];
+      const units = ['次','下','回'];
+      const buttonTexts = ['菲比啾比~','菲比啾比！','菲比~','菲比！','啾比~','啾比！'];
+      const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+      const counter = document.getElementById('chubby-local-counter');
+      const button = document.getElementById('chubby-counter-button');
+      const desc = document.getElementById('chubby-counter-desc');
+      const unit = document.getElementById('chubby-counter-unit');
+      if (!counter || !button) return;
+      let count = Number(localStorage.getItem('phoebe-chubby-count') || localStorage.getItem('count-v2') || 0);
+      let first = true;
+      const refresh = () => {
+        counter.textContent = count.toLocaleString('en-US');
+        desc.textContent = pick(dynamicTexts);
+        unit.textContent = pick(units);
+        button.textContent = pick(buttonTexts);
+      };
+      const ripple = (e) => {
+        const r = document.createElement('span');
+        r.className = 'chubby-ripple';
+        const rect = button.getBoundingClientRect();
+        r.style.left = `${e.clientX - rect.left}px`; r.style.top = `${e.clientY - rect.top}px`;
+        button.appendChild(r); setTimeout(() => r.remove(), 1000);
+      };
+      const play = () => {
+        const audio = new Audio(first ? audioList[0] : pick(audioList));
+        first = false; audio.play().catch(() => {}); audio.addEventListener('ended', () => audio.remove());
+      };
+      const fly = () => {
+        const img = document.createElement('img');
+        img.className = 'chubby-flyer'; img.src = pick(gifs);
+        img.style.left = '-260px'; img.style.top = `${Math.max(90, window.innerHeight * 0.35 + Math.random() * 220)}px`;
+        document.body.appendChild(img); setTimeout(() => img.remove(), 2400);
+      };
+      button.addEventListener('click', (e) => {
+        count += 1; localStorage.setItem('phoebe-chubby-count', String(count));
+        ripple(e); play(); fly(); refresh();
+      });
+      refresh(); button.disabled = false;
+    })();
+  </script>
 </body>
 </html>
+
